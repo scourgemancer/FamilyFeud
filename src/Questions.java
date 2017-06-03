@@ -4,9 +4,10 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
- * Represents the questions in the game and holds their answers
+ * Makes all of the Question objects and organizes answers into each Question
  */
 public class Questions{
 	public Questions(String filename){
