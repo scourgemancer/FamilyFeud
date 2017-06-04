@@ -3,10 +3,10 @@
  */
 public class Answer{
 	public String answer;
-	public int value;
+	public int points;
 
-	public Answer(String a, int v){
+	public Answer(String a, int p){
 		answer = a;
-		value = v;
+		points = p;
 	}
 }

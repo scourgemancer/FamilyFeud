@@ -8,9 +8,42 @@ public class Question{
 
 	public ArrayList<Answer> answers;
 
-	public Question(){
-
+	public Question(String q){
+		question = q;
+		answers = new ArrayList<>();
 	}
 
-	//todo add a comment to add an answer or a list of answers
+	public Question(String q, String[] ans, int[] scores){
+		question = q;
+		answers = new ArrayList<>();
+		addAnswer(ans, scores);
+	}
+
+	public Question(String q, ArrayList<String> ans, ArrayList<Integer> scores){
+		question = q;
+		answers = new ArrayList<>();
+		addAnswer(ans, scores);
+	}
+
+	public void addAnswer(String answer, int score){
+		Answer a = new Answer(answer, score);
+		int idx = answers.size()-1;
+		while(idx > 0){
+			if(answers.get(idx).points > score) break;
+			idx--;
+		}
+		answers.add(++idx, a);
+	}
+
+	public void addAnswer(String[] answers, int[] scores) throws AssertionError{
+		if(answers.length != scores.length) throw new AssertionError("Answers and scores don't match");
+		for(int i=0; i < answers.length; i++)
+			addAnswer(answers[i], scores[i]);
+	}
+
+	public void addAnswer(ArrayList<String> answers, ArrayList<Integer> scores) throws AssertionError{
+		if(answers.size() != scores.size()) throw new AssertionError("Answers and scores don't match");
+		for(int i=0; i < answers.size(); i++)
+			addAnswer(answers.get(i), scores.get(i));
+	}
 }
