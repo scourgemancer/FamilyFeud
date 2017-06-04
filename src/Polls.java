@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * Makes all of the Question objects and organizes answers into each Question
  */
-public class Questions{
-	public Questions(String filename){
+public class Polls{
+	public Polls(String filename){
 
 	}
 
-	public Questions(){
+	public Polls(){
 		try{
 			File questionFile = new File("questions.txt");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
