@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Represents each individual Question and contains the Question and each of its answers, in order
@@ -11,6 +12,17 @@ public class Question{
 	public Question(String q){
 		question = q;
 		answers = new ArrayList<>();
+	}
+
+	public Question(String q, Answer[] a){
+		question = q;
+		answers = new ArrayList<>();
+		answers = new ArrayList<>( Arrays.asList(a) );
+	}
+
+	public Question(String q, ArrayList<Answer> a){
+		question = q;
+		answers = a;
 	}
 
 	public Question(String q, String[] ans, int[] scores){
