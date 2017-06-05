@@ -14,7 +14,29 @@ public class Polls{
 	public ArrayList<Question> polls;	//todo - populate with all of the questions from the XML document
 
 	public Polls(String filename){
-
+		try{
+			File questionFile = new File( filename );
+			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse( questionFile );
+			doc.getDocumentElement().normalize();
+			NodeList questions = doc.getElementsByTagName("question");
+			for(int i=0; i < questions.getLength(); i++){
+				Node n = questions.item(i);
+				if(n.getNodeType() == Node.ELEMENT_NODE){
+					Element questionNode = (Element) n;
+					String questionText = questionNode.getAttribute("text");
+					Question question = new Question(questionText);
+					NodeList answerNodes = questionNode.getElementsByTagName("answer");
+					for(int j=0; j < answerNodes.getLength(); j++){
+						Node a = answerNodes.item(j);
+						if(a.getNodeType() == Node.ELEMENT_NODE){
+							Element answer = (Element) a;
+							question.addAnswer( answer.getAttribute("text"), Integer.parseInt( answer.getAttribute("points") ) );
+						}
+					}
+					polls.add( question );
+				}
+			}
+		}catch(Exception e){ e.printStackTrace(); }
 	}
 
 	public Polls(){
@@ -26,12 +48,20 @@ public class Polls{
 			for(int i=0; i < questions.getLength(); i++){
 				Node n = questions.item(i);
 				if(n.getNodeType() == Node.ELEMENT_NODE){
-					Element question = (Element) n;
-					String questionText = question.getAttribute("text");
-					NodeList answerNodes = question.getElementsByTagName("answer");
+					Element questionNode = (Element) n;
+					String questionText = questionNode.getAttribute("text");
+					Question question = new Question(questionText);
+					NodeList answerNodes = questionNode.getElementsByTagName("answer");
+					for(int j=0; j < answerNodes.getLength(); j++){
+						Node a = answerNodes.item(j);
+						if(a.getNodeType() == Node.ELEMENT_NODE){
+							Element answer = (Element) a;
+							question.addAnswer( answer.getAttribute("text"), Integer.parseInt( answer.getAttribute("points") ) );
+						}
+					}
+					polls.add( question );
 				}
 			}
-			//todo - add the questions to a list and go over XML parsing in Java
 		}catch(Exception e){ e.printStackTrace(); }
 	}
 }

@@ -37,6 +37,10 @@ public class Question{
 		addAnswer(ans, scores);
 	}
 
+	public void addAnswer(Answer answer){
+		answers.add(answer);
+	}
+
 	public void addAnswer(String answer, int score){
 		Answer a = new Answer(answer, score);
 		int idx = answers.size()-1;
