@@ -39,29 +39,5 @@ public class Polls{
 		}catch(Exception e){ e.printStackTrace(); }
 	}
 
-	public Polls(){
-		try{
-			File questionFile = new File("questions.txt");
-			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse( questionFile );
-			doc.getDocumentElement().normalize();
-			NodeList questions = doc.getElementsByTagName("question");
-			for(int i=0; i < questions.getLength(); i++){
-				Node n = questions.item(i);
-				if(n.getNodeType() == Node.ELEMENT_NODE){
-					Element questionNode = (Element) n;
-					String questionText = questionNode.getAttribute("text");
-					Question question = new Question(questionText);
-					NodeList answerNodes = questionNode.getElementsByTagName("answer");
-					for(int j=0; j < answerNodes.getLength(); j++){
-						Node a = answerNodes.item(j);
-						if(a.getNodeType() == Node.ELEMENT_NODE){
-							Element answer = (Element) a;
-							question.addAnswer( answer.getAttribute("text"), Integer.parseInt( answer.getAttribute("points") ) );
-						}
-					}
-					polls.add( question );
-				}
-			}
-		}catch(Exception e){ e.printStackTrace(); }
-	}
+	public Polls(){ this("questions.txt"); }
 }
