@@ -11,11 +11,11 @@ import java.util.ArrayList;
  * Makes all of the Question objects and organizes answers into each Question
  */
 public class Polls{
-	public ArrayList<Question> polls;	//todo - populate with all of the questions from the XML document
+	public ArrayList<Question> questions = new ArrayList<>();
 
 	public Polls(String filename){
 		try{
-			File questionFile = new File( filename );
+			File questionFile = new File( "src\\" + filename );
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse( questionFile );
 			doc.getDocumentElement().normalize();
 			NodeList questions = doc.getElementsByTagName("question");
@@ -33,7 +33,7 @@ public class Polls{
 							question.addAnswer( answer.getAttribute("text"), Integer.parseInt( answer.getAttribute("points") ) );
 						}
 					}
-					polls.add( question );
+					this.questions.add( question );
 				}
 			}
 		}catch(Exception e){ e.printStackTrace(); }

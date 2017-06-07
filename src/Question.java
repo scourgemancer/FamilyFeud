@@ -62,4 +62,13 @@ public class Question{
 		for(int i=0; i < answers.size(); i++)
 			addAnswer(answers.get(i), scores.get(i));
 	}
+
+	/** Checks if a guses is an answer and returns its index, or -1 if no there **/
+	public int guessAnswer(String guess){
+		int answer = -1;
+		for(int i = answers.size()-1; i > -1; i--){
+			if(answers.equals(guess)) answer = i;
+		}
+		return answer;
+	}
 }
