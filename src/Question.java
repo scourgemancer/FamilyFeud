@@ -67,6 +67,7 @@ public class Question{
 	public int guessAnswer(String guess){
 		int answer = -1;
 		for(int i = answers.size()-1; i > -1; i--){
+			if(answers.get(i).answer.toLowerCase().equals(guess.toLowerCase()))
 			if(answers.equals(guess)) answer = i;
 		}
 		return answer;
