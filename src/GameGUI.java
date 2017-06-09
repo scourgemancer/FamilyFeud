@@ -1,4 +1,9 @@
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -9,6 +14,11 @@ import javafx.stage.Stage;
 public class GameGUI extends Application{
 	private Polls polls;
 	private Thread audio;
+
+	int leftTeam, rightTeam;
+	String leftName = "Apple";
+	String rightName = "Pie";
+	Scene scene;
 
 	private void playAudio(String filename){
 		stopAudio();
@@ -21,14 +31,34 @@ public class GameGUI extends Application{
 
 	private void stopAudio(){ if(audio != null) if(audio.isAlive()) audio.interrupt(); }
 
-	@Override
-	public void init(){
-		polls = new Polls("questions.txt");
+	/** Each tile can be made uniform and internalize complexity **/
+	private class AnswerTile extends Button{
+
 	}
 
 	@Override
-	public void start(Stage stage){
+	public void init(){ polls = new Polls("questions.txt"); }
 
+	@Override
+	public void start(Stage stage){
+		BorderPane window = new BorderPane();
+		scene = new Scene(window);
+
+		BorderPane scores = new BorderPane();
+		BorderPane names = new BorderPane();
+		VBox top = new VBox(names, scores);
+		window.setTop(top);
+
+		VBox leftAnswers = new VBox();
+		for(int i=1; i<6; i++)
+			leftAnswers.getChildren().add(new AnswerTile());
+		VBox rightAnswers = new VBox();
+		for(int i=1; i<6; i++)
+			rightAnswers.getChildren().add(new AnswerTile());
+		HBox answers = new HBox(leftAnswers, rightAnswers);
+		window.setCenter(answers);
+
+		stage.setScene(scene);
 		stage.setTitle("Family Feud");
 		stage.setFullScreen(true);
 	}
