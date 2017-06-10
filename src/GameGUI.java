@@ -1,11 +1,12 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
@@ -32,8 +33,8 @@ public class GameGUI extends Application{
 	private void stopAudio(){ if(audio != null) if(audio.isAlive()) audio.interrupt(); }
 
 	/** Each tile can be made uniform and internalize complexity **/
-	private class AnswerTile extends Button{
-
+	private class AnswerTile extends Rectangle{
+		//todo - add all internal complexity and functions to be pressed, animate itself, et cetera
 	}
 
 	@Override
@@ -57,6 +58,10 @@ public class GameGUI extends Application{
 			rightAnswers.getChildren().add(new AnswerTile());
 		HBox answers = new HBox(leftAnswers, rightAnswers);
 		window.setCenter(answers);
+
+		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+			//todo - process keyboard input here
+		});
 
 		stage.setScene(scene);
 		stage.setTitle("Family Feud");
