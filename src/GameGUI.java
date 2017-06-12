@@ -60,7 +60,27 @@ public class GameGUI extends Application{
 		window.setCenter(answers);
 
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-			//todo - process keyboard input here
+			//todo - finish processing keyboard input here
+			switch(key.getText()){
+				case "1": break;
+				case "2": break;
+				case "3": break;
+				case "4": break;
+				case "5": break;
+				case "6": break;
+				case "7": break;
+				case "8": break;
+				case "9": break;
+				case "0": break;
+				case "t": break; //theme song
+				case "x": break; //strike sound
+				case "LEFT": break;
+				case "RIGHT": break;
+				case "UP": break;
+				case "DOWN": break;
+				case "ENTER": break; //this goes forward if you've gone backwards w/o editing, else goes to fast money
+				case "BACKSPACE": break; //implement an undo function
+			}
 		});
 
 		stage.setScene(scene);
