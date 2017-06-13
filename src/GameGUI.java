@@ -61,7 +61,7 @@ public class GameGUI extends Application{
 
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
 			//todo - finish processing keyboard input here
-			switch(key.getText()){
+			switch(key.getCode().getName()){
 				case "1": break;
 				case "2": break;
 				case "3": break;
@@ -85,7 +85,8 @@ public class GameGUI extends Application{
 
 		stage.setScene(scene);
 		stage.setTitle("Family Feud");
-		stage.setFullScreen(true);
+		//stage.setFullScreen(true);
+		stage.show();
 	}
 
 	public static void main(String[] args){ Application.launch(args); }
