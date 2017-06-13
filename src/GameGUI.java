@@ -74,12 +74,12 @@ public class GameGUI extends Application{
 				case "0": break;
 				case "t": break; //theme song
 				case "x": break; //strike sound
-				case "LEFT": break;
-				case "RIGHT": break;
-				case "UP": break;
-				case "DOWN": break;
-				case "ENTER": break; //this goes forward if you've gone backwards w/o editing, else goes to fast money
-				case "BACKSPACE": break; //implement an undo function
+				case "Left": break;
+				case "Right": break;
+				case "Up": break;
+				case "Down": break;
+				case "Enter": break; //this goes forward if you've gone backwards w/o editing, else goes to fast money
+				case "Backspace": break; //implement an undo function
 			}
 		});
 
