@@ -34,7 +34,14 @@ public class GameGUI extends Application{
 
 	/** Each tile can be made uniform and internalize complexity **/
 	private class AnswerTile extends Rectangle{
-		//todo - add all internal complexity and functions to be pressed, animate itself, et cetera
+		int rank;
+		Answer answer;
+
+		AnswerTile(int i){ rank  = i; }
+
+		void setAnswer(Answer a){ answer = a; }
+
+		void reveal(){  }//todo - animate the question revealing itself
 	}
 
 	@Override
@@ -52,10 +59,10 @@ public class GameGUI extends Application{
 
 		VBox leftAnswers = new VBox();
 		for(int i=1; i<6; i++)
-			leftAnswers.getChildren().add(new AnswerTile());
+			leftAnswers.getChildren().add(new AnswerTile(i));
 		VBox rightAnswers = new VBox();
 		for(int i=1; i<6; i++)
-			rightAnswers.getChildren().add(new AnswerTile());
+			rightAnswers.getChildren().add(new AnswerTile(i));
 		HBox answers = new HBox(leftAnswers, rightAnswers);
 		window.setCenter(answers);
 
