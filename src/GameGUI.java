@@ -85,7 +85,7 @@ public class GameGUI extends Application{
 
 		stage.setScene(scene);
 		stage.setTitle("Family Feud");
-		//stage.setFullScreen(true);
+		stage.setFullScreen(true);
 		stage.show();
 	}
 
