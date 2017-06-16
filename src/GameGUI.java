@@ -9,12 +9,15 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 /**
  * The graphical view for the game and starting point of the program
  */
 public class GameGUI extends Application{
 	private Polls polls;
 	private Thread audio;
+	private ArrayList<AnswerTile> answerTiles;
 
 	int leftTeam, rightTeam;
 	String leftName = "Apple";
@@ -37,7 +40,10 @@ public class GameGUI extends Application{
 		int rank;
 		Answer answer;
 
-		AnswerTile(int i){ rank  = i; }
+		AnswerTile(int i){
+			rank  = i;
+			answerTiles.add(this);
+		}
 
 		void setAnswer(Answer a){ answer = a; }
 
@@ -69,20 +75,21 @@ public class GameGUI extends Application{
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
 			//todo - finish processing keyboard input here
 			switch(key.getCode().getName()){
-				case "1": break;
-				case "2": break;
-				case "3": break;
-				case "4": break;
-				case "5": break;
-				case "6": break;
-				case "7": break;
-				case "8": break;
-				case "9": break;
-				case "0": break;
-				case "t": break; //theme song
-				case "x": break; //strike sound
+				case "1": answerTiles.get(0).reveal(); break;
+				case "2": answerTiles.get(1).reveal(); break;
+				case "3": answerTiles.get(2).reveal(); break;
+				case "4": answerTiles.get(3).reveal(); break;
+				case "5": answerTiles.get(4).reveal(); break;
+				case "6": answerTiles.get(5).reveal(); break;
+				case "7": answerTiles.get(6).reveal(); break;
+				case "8": answerTiles.get(7).reveal(); break;
+				case "9": answerTiles.get(8).reveal(); break;
+				case "0": answerTiles.get(9).reveal(); break;
+				case "t": playAudio("theme.mp3"); break; //theme song
+				case "x": playAudio("strike.mp3"); break; //strike sound
 				case "Left": break;
 				case "Right": break;
+				case "Space": break;
 				case "Up": break;
 				case "Down": break;
 				case "Enter": break; //this goes forward if you've gone backwards w/o editing, else goes to fast money
