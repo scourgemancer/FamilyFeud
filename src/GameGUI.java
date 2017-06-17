@@ -87,6 +87,7 @@ public class GameGUI extends Application{
 				case "0": answerTiles.get(9).reveal(); break;
 				case "t": playAudio("theme.mp3"); break; //theme song
 				case "x": playAudio("strike.mp3"); break; //strike sound
+				case "s": stopAudio(); break; //stops all of the audio
 				case "Left": break;
 				case "Right": break;
 				case "Space": break;
