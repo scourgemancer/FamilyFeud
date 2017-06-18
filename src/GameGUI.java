@@ -16,13 +16,14 @@ import java.util.ArrayList;
  */
 public class GameGUI extends Application{
 	private Polls polls;
+	private Scene scene;
 	private Thread audio;
 	private ArrayList<AnswerTile> answerTiles;
 
-	int leftTeam, rightTeam;
 	String leftName = "Apple";
 	String rightName = "Pie";
-	Scene scene;
+	int leftTeam, rightTeam; //used for keeping track of team scores
+
 
 	private void playAudio(String filename){
 		stopAudio();
@@ -35,7 +36,6 @@ public class GameGUI extends Application{
 
 	private void stopAudio(){ if(audio != null) if(audio.isAlive()) audio.interrupt(); }
 
-	/** Each tile can be made uniform and internalize complexity **/
 	private class AnswerTile extends Rectangle{
 		int rank;
 		Answer answer;
@@ -58,11 +58,13 @@ public class GameGUI extends Application{
 		BorderPane window = new BorderPane();
 		scene = new Scene(window);
 
+		//Areas for the team names, scores, and current question value
 		BorderPane scores = new BorderPane();
 		BorderPane names = new BorderPane();
 		VBox top = new VBox(names, scores);
 		window.setTop(top);
 
+		//The area containing the actual answers
 		VBox leftAnswers = new VBox();
 		for(int i=1; i<6; i++)
 			leftAnswers.getChildren().add(new AnswerTile(i));
@@ -72,6 +74,7 @@ public class GameGUI extends Application{
 		HBox answers = new HBox(leftAnswers, rightAnswers);
 		window.setCenter(answers);
 
+		//Handles user input with the program
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
 			//todo - finish processing keyboard input here
 			switch(key.getCode().getName()){
