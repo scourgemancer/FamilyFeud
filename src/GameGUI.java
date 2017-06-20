@@ -22,7 +22,9 @@ public class GameGUI extends Application{
 
 	String leftName = "Apple";
 	String rightName = "Pie";
-	int leftTeam, rightTeam; //used for keeping track of team scores
+	int leftTeam, rightTeam = 0; //used for keeping track of team scores
+	boolean onLeft; //used to signify if the left team is highlighted or not
+	int multiplier = 1;
 
 
 	private void playAudio(String filename){
@@ -91,11 +93,11 @@ public class GameGUI extends Application{
 				case "t": playAudio("theme.mp3"); break; //theme song
 				case "x": playAudio("strike.mp3"); break; //strike sound
 				case "s": stopAudio(); break; //stops all of the audio
-				case "Left": break;
-				case "Right": break;
+				case "Left": onLeft = true; break;
+				case "Right": onLeft = false; break;
 				case "Space": break;
-				case "Up": break;
-				case "Down": break;
+				case "Up": multiplier++; break;
+				case "Down": if(multiplier > 1) multiplier--; break;
 				case "Enter": break; //this goes forward if you've gone backwards w/o editing, else goes to fast money
 				case "Backspace": break; //implement an undo function
 			}
