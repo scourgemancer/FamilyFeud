@@ -1,9 +1,8 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
@@ -67,6 +66,7 @@ public class GameGUI extends Application{
 		window.setTop(top);
 
 		//The area containing the actual answers
+		answerTiles = new ArrayList<>();
 		VBox leftAnswers = new VBox();
 		for(int i=1; i<6; i++)
 			leftAnswers.getChildren().add(new AnswerTile(i));
@@ -102,6 +102,12 @@ public class GameGUI extends Application{
 				case "Backspace": break; //implement an undo function
 			}
 		});
+
+		//Setup the background of the program
+		BackgroundImage bi = new BackgroundImage(new Image("resources\\background.png"),
+				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+				BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+		window.setBackground( new Background(bi) );
 
 		stage.setScene(scene);
 		stage.setTitle("Family Feud");
