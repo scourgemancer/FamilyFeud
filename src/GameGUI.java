@@ -105,8 +105,8 @@ public class GameGUI extends Application{
 
 		//Setup the background of the program
 		BackgroundImage bi = new BackgroundImage(new Image("resources\\background.png"),
-				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-				BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+				new BackgroundSize(100, 100, true, true, true, false));
 		window.setBackground( new Background(bi) );
 
 		stage.setScene(scene);
