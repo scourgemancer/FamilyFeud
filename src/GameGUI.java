@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -6,6 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -104,9 +106,11 @@ public class GameGUI extends Application{
 		});
 
 		//Setup the background of the program
-		BackgroundImage bi = new BackgroundImage(new Image("resources\\background.png"),
-				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-				new BackgroundSize(100, 100, true, true, true, false));
+		Rectangle2D screen =Screen.getPrimary().getBounds();
+		BackgroundImage bi = new BackgroundImage(
+				new Image("resources\\background.png", screen.getWidth(), screen.getHeight(), false, true),
+				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+				BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 		window.setBackground( new Background(bi) );
 
 		stage.setScene(scene);
