@@ -50,7 +50,7 @@ public class GameGUI extends Application{
 
 		void setAnswer(Answer a){ answer = a; }
 
-		void reveal(){  }//todo - animate the question revealing itself
+		void reveal(){  }//todo - animate the question revealing itself (flip while rotating in place && play sound)
 	}
 
 	@Override
