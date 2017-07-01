@@ -7,6 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -62,9 +63,20 @@ public class GameGUI extends Application{
 		scene = new Scene(window);
 
 		//Areas for the team names, scores, and current question value
-		BorderPane scores = new BorderPane();
-		BorderPane names = new BorderPane();
-		VBox top = new VBox(names, scores);
+		BorderPane top = new BorderPane();
+		VBox leftFamily = new VBox();
+		Text leftName = new Text("Hooffields");
+		Text leftPoints = new Text("0");
+		top.setLeft(leftFamily);
+
+		Text currentPoints = new Text("0");
+		top.setCenter(currentPoints);
+
+		VBox rightFamily = new VBox();
+		Text rightName = new Text("McColts");
+		Text rightPoints = new Text("0");
+		top.setRight(rightFamily);
+
 		window.setTop(top);
 
 		//The area containing the actual answers
