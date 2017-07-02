@@ -7,6 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -28,6 +29,8 @@ public class GameGUI extends Application{
 	boolean onLeft; //used to signify if the left team is highlighted or not
 	int multiplier = 1;
 
+	//loading in a custom font for improved visibility
+	Font customFont = Font.loadFont("resources\\carbono_pw.ttf", 20);
 
 	private void playAudio(String filename){
 		stopAudio();
@@ -67,14 +70,19 @@ public class GameGUI extends Application{
 		VBox leftFamily = new VBox();
 		Text leftName = new Text("Hooffields");
 		Text leftPoints = new Text("0");
+		leftName.setFont(customFont);
+		leftPoints.setFont(customFont);
 		top.setLeft(leftFamily);
 
 		Text currentPoints = new Text("0");
+		currentPoints.setFont(customFont);
 		top.setCenter(currentPoints);
 
 		VBox rightFamily = new VBox();
 		Text rightName = new Text("McColts");
 		Text rightPoints = new Text("0");
+		rightName.setFont(customFont);
+		rightPoints.setFont(customFont);
 		top.setRight(rightFamily);
 
 		window.setTop(top);
