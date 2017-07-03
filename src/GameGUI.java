@@ -29,8 +29,7 @@ public class GameGUI extends Application{
 	boolean onLeft; //used to signify if the left team is highlighted or not
 	int multiplier = 1;
 
-	//loading in a custom font for improved visibility
-	Font customFont = Font.loadFont("resources\\carbono_pw.ttf", 20);
+	Font customFont; //used for all text throughout the GUI for visibility
 
 	private void playAudio(String filename){
 		stopAudio();
@@ -58,7 +57,12 @@ public class GameGUI extends Application{
 	}
 
 	@Override
-	public void init(){ polls = new Polls("questions.txt"); }
+	public void init(){
+		polls = new Polls("questions.txt");
+
+		//loading in a custom font for improved visibility
+		customFont = Font.loadFont(getClass().getResourceAsStream("resources/carbono_pw.ttf"), 200);
+	}
 
 	@Override
 	public void start(Stage stage){
