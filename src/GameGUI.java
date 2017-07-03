@@ -72,6 +72,7 @@ public class GameGUI extends Application{
 		Text leftPoints = new Text("0");
 		leftName.setFont(customFont);
 		leftPoints.setFont(customFont);
+		leftFamily.getChildren().addAll(leftName, leftPoints);
 		top.setLeft(leftFamily);
 
 		Text currentPoints = new Text("0");
@@ -83,6 +84,7 @@ public class GameGUI extends Application{
 		Text rightPoints = new Text("0");
 		rightName.setFont(customFont);
 		rightPoints.setFont(customFont);
+		rightFamily.getChildren().addAll(rightName, rightPoints);
 		top.setRight(rightFamily);
 
 		window.setTop(top);
