@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -32,6 +33,8 @@ public class GameGUI extends Application{
 	boolean onLeft; //used to signify if the left team is highlighted or not
 	int multiplier = 1;
 
+	Rectangle2D screen; //used for increased readability when referencing the screen size
+
 	private void playAudio(String filename){
 		stopAudio();
 		audio = new Thread(() -> {
@@ -63,7 +66,10 @@ public class GameGUI extends Application{
 	}
 
 	@Override
-	public void init(){ polls = new Polls("questions.txt"); }
+	public void init(){
+		polls = new Polls("questions.txt");
+		screen = Screen.getPrimary().getVisualBounds();
+	}
 
 	@Override
 	public void start(Stage stage){
@@ -76,24 +82,29 @@ public class GameGUI extends Application{
 		VBox leftFamily = new VBox();
 		leftFamily.setAlignment(Pos.CENTER);
 		Text leftName = new Text("Hooffields");
-		Text leftPoints = new Text("0");
+		Text leftPoints = new Text("6969");
 		styleText(leftName, 200);
 		styleText(leftPoints, 375);
 		leftFamily.getChildren().addAll(leftName, leftPoints);
 		top.setLeft(leftFamily);
+		leftFamily.setSpacing(screen.getHeight()/100);
+		BorderPane.setMargin(leftFamily, new Insets(screen.getHeight()/100, 0, 0, screen.getWidth()/28));
 
-		Text currentPoints = new Text("0");
+		Text currentPoints = new Text("6969");
 		styleText(currentPoints, 450);
 		top.setCenter(currentPoints);
+		BorderPane.setMargin(currentPoints, new Insets(screen.getHeight()/15, screen.getWidth()/80, 0, 0));
 
 		VBox rightFamily = new VBox();
 		rightFamily.setAlignment(Pos.CENTER);
 		Text rightName = new Text("McColts");
-		Text rightPoints = new Text("0");
+		Text rightPoints = new Text("6969");
 		styleText(rightName, 200);
 		styleText(rightPoints, 375);
 		rightFamily.getChildren().addAll(rightName, rightPoints);
 		top.setRight(rightFamily);
+		rightFamily.setSpacing(screen.getHeight()/100);
+		BorderPane.setMargin(rightFamily, new Insets(screen.getHeight()/100, screen.getWidth()/18, 0, 0));
 
 		window.setTop(top);
 
