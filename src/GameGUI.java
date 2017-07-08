@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -42,9 +43,9 @@ public class GameGUI extends Application{
 
 	private void stopAudio(){ if(audio != null) if(audio.isAlive()) audio.interrupt(); }
 
-	private void styleText(Text text){
-		text.setFont(Font.font("verdana", FontWeight.BLACK, 200));
-		text.setStyle("-fx-fill: white; -fx-stroke: black; -fx-stroke-width: 10px");
+	private void styleText(Text text, double size){
+		text.setFont(Font.font("Calibri", FontWeight.BLACK, size));
+		text.setStyle("-fx-fill: white; -fx-stroke: black; -fx-stroke-width: " + size/20 + "px");
 	}
 
 	private class AnswerTile extends Rectangle{
@@ -69,29 +70,28 @@ public class GameGUI extends Application{
 		BorderPane window = new BorderPane();
 		scene = new Scene(window);
 
-		//todo - remove this (used to identify available font families & experiment)
-		for(String s : javafx.scene.text.Font.getFamilies())
-			System.out.println(s);
-
 		//Areas for the team names, scores, and current question value
 		BorderPane top = new BorderPane();
+
 		VBox leftFamily = new VBox();
+		leftFamily.setAlignment(Pos.CENTER);
 		Text leftName = new Text("Hooffields");
 		Text leftPoints = new Text("0");
-		styleText(leftName);
-		styleText(leftPoints);
+		styleText(leftName, 200);
+		styleText(leftPoints, 375);
 		leftFamily.getChildren().addAll(leftName, leftPoints);
 		top.setLeft(leftFamily);
 
 		Text currentPoints = new Text("0");
-		styleText(currentPoints);
+		styleText(currentPoints, 450);
 		top.setCenter(currentPoints);
 
 		VBox rightFamily = new VBox();
+		rightFamily.setAlignment(Pos.CENTER);
 		Text rightName = new Text("McColts");
 		Text rightPoints = new Text("0");
-		styleText(rightName);
-		styleText(rightPoints);
+		styleText(rightName, 200);
+		styleText(rightPoints, 375);
 		rightFamily.getChildren().addAll(rightName, rightPoints);
 		top.setRight(rightFamily);
 
