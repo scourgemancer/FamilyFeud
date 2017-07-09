@@ -83,15 +83,15 @@ public class GameGUI extends Application{
 		leftFamily.setAlignment(Pos.CENTER);
 		Text leftName = new Text("Hooffields");
 		Text leftPoints = new Text("6969");
-		styleText(leftName, 200);
-		styleText(leftPoints, 375);
+		styleText(leftName, screen.getHeight()/10.55);
+		styleText(leftPoints, screen.getHeight()/5.63);
 		leftFamily.getChildren().addAll(leftName, leftPoints);
 		top.setLeft(leftFamily);
 		leftFamily.setSpacing(screen.getHeight()/100);
 		BorderPane.setMargin(leftFamily, new Insets(screen.getHeight()/100, 0, 0, screen.getWidth()/28));
 
 		Text currentPoints = new Text("6969");
-		styleText(currentPoints, 450);
+		styleText(currentPoints, screen.getHeight()/4.69);
 		top.setCenter(currentPoints);
 		BorderPane.setMargin(currentPoints, new Insets(screen.getHeight()/15, screen.getWidth()/80, 0, 0));
 
@@ -99,8 +99,8 @@ public class GameGUI extends Application{
 		rightFamily.setAlignment(Pos.CENTER);
 		Text rightName = new Text("McColts");
 		Text rightPoints = new Text("6969");
-		styleText(rightName, 200);
-		styleText(rightPoints, 375);
+		styleText(rightName, screen.getHeight()/10.55);
+		styleText(rightPoints, screen.getHeight()/5.63);
 		rightFamily.getChildren().addAll(rightName, rightPoints);
 		top.setRight(rightFamily);
 		rightFamily.setSpacing(screen.getHeight()/100);
