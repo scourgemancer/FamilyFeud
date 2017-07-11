@@ -48,7 +48,7 @@ public class GameGUI extends Application{
 
 	private void styleText(Text text, double size){
 		text.setFont(Font.font("Calibri", FontWeight.BLACK, size));
-		text.setStyle("-fx-fill: white; -fx-stroke: black; -fx-stroke-width: " + size/20 + "px");
+		text.setStyle("-fx-fill: white; -fx-stroke: black; -fx-stroke-width: " + size/30 + "px");
 	}
 
 	private class AnswerTile extends Rectangle{
