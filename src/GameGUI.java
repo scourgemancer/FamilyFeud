@@ -51,13 +51,22 @@ public class GameGUI extends Application{
 		text.setStyle("-fx-fill: white; -fx-stroke: black; -fx-stroke-width: " + size/30 + "px");
 	}
 
-	private class AnswerTile extends Rectangle{
+    private void setImageAsBackground( Region region, String image, double width, double height ){
+        BackgroundImage bi = new BackgroundImage(
+                new Image("resources\\" + image, width, height, false, true),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        region.setBackground( new Background(bi) );
+    }
+
+	private class AnswerTile extends AnchorPane{
 		int rank;
 		Answer answer;
 
 		AnswerTile(int i){
 			rank  = i;
 			answerTiles.add(this);
+			setImageAsBackground(this, "blank answer tile.png", screen.getWidth()/3, screen.getHeight()/8);
 		}
 
 		void setAnswer(Answer a){ answer = a; }//todo - add or remove a number if relevant rank
@@ -112,6 +121,10 @@ public class GameGUI extends Application{
 
 		window.setTop(top);
 
+        //Setup the background of the program
+        Rectangle2D screen =Screen.getPrimary().getBounds();
+        setImageAsBackground(window, "background.png", screen.getWidth(), screen.getHeight());
+
 		//The area containing the actual answers
 		answerTiles = new ArrayList<>();
 		VBox leftAnswers = new VBox();
@@ -151,14 +164,6 @@ public class GameGUI extends Application{
 				case "Enter": break; //todo - redoes if an action was just undone, else goes to fast money
 			}
 		});
-
-		//Setup the background of the program
-		Rectangle2D screen =Screen.getPrimary().getBounds();
-		BackgroundImage bi = new BackgroundImage(
-				new Image("resources\\background.png", screen.getWidth(), screen.getHeight(), false, true),
-				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-				BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-		window.setBackground( new Background(bi) );
 
 		stage.setScene(scene);
 		stage.setTitle("Family Feud");
