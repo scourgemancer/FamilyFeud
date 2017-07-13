@@ -60,10 +60,14 @@ public class GameGUI extends Application{
 			answerTiles.add(this);
 		}
 
-		void setAnswer(Answer a){ answer = a; }
+		void setAnswer(Answer a){ answer = a; }//todo - add or remove a number if relevant rank
 
 		void reveal(){  }//todo - animate the question revealing itself (flip while rotating in place && play sound)
 	}
+
+	private void setupQuestion(Question q){
+	    //todo
+    }
 
 	@Override
 	public void init(){
@@ -133,16 +137,18 @@ public class GameGUI extends Application{
 				case "8": answerTiles.get(7).reveal(); break;
 				case "9": answerTiles.get(8).reveal(); break;
 				case "0": answerTiles.get(9).reveal(); break;
+                case "b": break; //todo - back a question
+                case "n": break; //todo - next question
 				case "t": playAudio("theme.mp3"); break; //theme song
 				case "x": playAudio("strike.mp3"); break; //strike sound
 				case "s": stopAudio(); break; //stops all of the audio
 				case "Left": onLeft = true; break;
 				case "Right": onLeft = false; break;
-				case "Space": break;
 				case "Up": multiplier++; break;
 				case "Down": if(multiplier > 1) multiplier--; break;
-				case "Enter": break; //this goes forward if you've gone backwards w/o editing, else goes to fast money
-				case "Backspace": break; //implement an undo function
+                case "Space": break; //todo - increase current team's points
+                case "Backspace": break; //todo - undo
+				case "Enter": break; //todo - redoes if an action was just undone, else goes to fast money
 			}
 		});
 
