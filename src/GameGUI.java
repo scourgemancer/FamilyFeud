@@ -71,21 +71,23 @@ public class GameGUI extends Application{
 			rank  = i;
 			answerTiles.add(this);
 
-			setImageAsBackground(this, "revealed answer tile (unblurred).png", screen.getWidth()/3, screen.getHeight()/8.3);
+			setImageAsBackground(this, "revealed answer tile.png", screen.getWidth()/2.96, screen.getHeight()/8.3);
+			if(rank > 3) setImageAsBackground(this, "numbered answer tile.png", screen.getWidth()/2.96, screen.getHeight()/8.3);
+			if(rank > 7) setImageAsBackground(this, "blank answer tile.png", screen.getWidth()/2.96, screen.getHeight()/8.3);
+if(rank<4) {
+    answerText = new Text("Tile's rank: " + rank);
+    styleText(answerText, screen.getHeight() / 12);
+    valueText = new Text("23");
+    styleText(valueText, screen.getHeight() / 9);
 
-			answerText = new Text("Tile's rank: " + rank);
-            styleText(answerText, screen.getHeight()/12);
-			valueText = new Text("23");
-			styleText(valueText, screen.getHeight()/9);
+    HBox tile = new HBox(answerText, valueText);
+    this.getChildren().add(tile);
 
-			HBox tile = new HBox(answerText, valueText);
-			this.getChildren().add(tile);
-
-			setTopAnchor(tile, 0.0);
-			setLeftAnchor(tile, 0.0);
-			setRightAnchor(tile, 0.0);
-			setBottomAnchor(tile, 0.0);
-			setPrefSize(screen.getWidth()/3, screen.getHeight()/8);
+    setTopAnchor(tile, 0.0);
+    setLeftAnchor(tile, 0.0);
+    setRightAnchor(tile, 0.0);
+    setBottomAnchor(tile, 0.0);
+}			setPrefSize(screen.getWidth()/2.96, screen.getHeight()/8.3);
 		}
 
 		void setAnswer(Answer a){ answer = a; }//todo - add or remove a numbered back if relevant rank && update Labels
@@ -153,17 +155,17 @@ public class GameGUI extends Application{
 		VBox leftAnswers = new VBox();
 		for(int i=1; i<6; i++)
             leftAnswers.getChildren().add(new AnswerTile(i));
-		leftAnswers.setSpacing(screen.getHeight()/150);
+		leftAnswers.setSpacing(screen.getHeight()/106.6);
 
 		VBox rightAnswers = new VBox();
         for(int i=6; i<11; i++)
             rightAnswers.getChildren().add(new AnswerTile(i));
-        rightAnswers.setSpacing(screen.getHeight()/150);
+        rightAnswers.setSpacing(screen.getHeight()/106.6);
 
         HBox answers = new HBox(leftAnswers, rightAnswers);
         answers.setSpacing(screen.getWidth()/150);
 		window.setCenter(answers);
-		BorderPane.setMargin(answers, new Insets(screen.getHeight()/21.4, 0, 0, screen.getWidth()/6.5));
+		BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/6.5));
 
 
 		//Handles user input with the program
