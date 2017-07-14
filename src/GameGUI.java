@@ -3,13 +3,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -62,14 +61,27 @@ public class GameGUI extends Application{
 	private class AnswerTile extends AnchorPane{
 		int rank;
 		Answer answer;
+		int value;
+
+		Label answerText;
+		Label valueText;
 
 		AnswerTile(int i){
+            super();
 			rank  = i;
 			answerTiles.add(this);
 			setImageAsBackground(this, "blank answer tile.png", screen.getWidth()/3, screen.getHeight()/8);
+            answerText = new Label("My rank is " + rank);
+            valueText = new Label("And this is where the value goes");
+			HBox tile = new HBox(answerText, valueText);
+			setTopAnchor(tile, 0.0);
+			setLeftAnchor(tile, 0.0);
+			setRightAnchor(tile, 0.0);
+			setBottomAnchor(tile, 0.0);
+			setPrefSize(screen.getWidth()/3, screen.getHeight()/8);
 		}
 
-		void setAnswer(Answer a){ answer = a; }//todo - add or remove a number if relevant rank
+		void setAnswer(Answer a){ answer = a; }//todo - add or remove a numbered back if relevant rank && update Labels
 
 		void reveal(){  }//todo - animate the question revealing itself (flip while rotating in place && play sound)
 	}
@@ -129,10 +141,10 @@ public class GameGUI extends Application{
 		answerTiles = new ArrayList<>();
 		VBox leftAnswers = new VBox();
 		for(int i=1; i<6; i++)
-			leftAnswers.getChildren().add(new AnswerTile(i));
+            leftAnswers.getChildren().add(new AnswerTile(i));
 		VBox rightAnswers = new VBox();
-		for(int i=1; i<6; i++)
-			rightAnswers.getChildren().add(new AnswerTile(i));
+        for(int i=6; i<11; i++)
+            rightAnswers.getChildren().add(new AnswerTile(i));
 		HBox answers = new HBox(leftAnswers, rightAnswers);
 		window.setCenter(answers);
 
