@@ -24,7 +24,7 @@ public class GameGUI extends Application{
 	private Polls polls;
 	private Scene scene;
 	private Thread audio;
-	private ArrayList<AnswerTile> answerTiles;
+	protected ArrayList<AnswerTile> answerTiles;
 
 	String leftName = "Apple";
 	String rightName = "Pie";
@@ -34,7 +34,7 @@ public class GameGUI extends Application{
 
 	Rectangle2D screen; //used for increased readability when referencing the screen size
 
-	private void playAudio(String filename){
+	protected void playAudio(String filename){
 		stopAudio();
 		audio = new Thread(() -> {
 			Media hit = new Media("src\\resources\\" + filename);
@@ -43,14 +43,14 @@ public class GameGUI extends Application{
 		});
 	}
 
-	private void stopAudio(){ if(audio != null) if(audio.isAlive()) audio.interrupt(); }
+	protected void stopAudio(){ if(audio != null) if(audio.isAlive()) audio.interrupt(); }
 
-	private void styleText(Text text, double size){
+	protected void styleText(Text text, double size){
 		text.setFont(Font.font("Calibri", FontWeight.BLACK, size));
 		text.setStyle("-fx-fill: white; -fx-stroke: black; -fx-stroke-width: " + size/30 + "px");
 	}
 
-    private void setImageAsBackground( Region region, String image, double width, double height ){
+    protected void setImageAsBackground( Region region, String image, double width, double height ){
         BackgroundImage bi = new BackgroundImage(
                 new Image("resources\\" + image, width, height, false, true),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
@@ -58,44 +58,7 @@ public class GameGUI extends Application{
         region.setBackground( new Background(bi) );
     }
 
-	private class AnswerTile extends AnchorPane{
-		int rank;
-		Answer answer;
-		int value;
-
-		Text answerText;
-		Text valueText;
-
-		AnswerTile(int i){
-            super();
-			rank  = i;
-			answerTiles.add(this);
-
-			setImageAsBackground(this, "revealed answer tile.png", screen.getWidth()/2.96, screen.getHeight()/8.3);
-			if(rank > 3) setImageAsBackground(this, "numbered answer tile.png", screen.getWidth()/2.96, screen.getHeight()/8.3);
-			if(rank > 7) setImageAsBackground(this, "blank answer tile.png", screen.getWidth()/2.96, screen.getHeight()/8.3);
-if(rank<4) {
-    answerText = new Text("Tile's rank: " + rank);
-    styleText(answerText, screen.getHeight() / 12);
-    valueText = new Text("23");
-    styleText(valueText, screen.getHeight() / 9);
-
-    HBox tile = new HBox(answerText, valueText);
-    this.getChildren().add(tile);
-
-    setTopAnchor(tile, 0.0);
-    setLeftAnchor(tile, 0.0);
-    setRightAnchor(tile, 0.0);
-    setBottomAnchor(tile, 0.0);
-}			setPrefSize(screen.getWidth()/2.96, screen.getHeight()/8.3);
-		}
-
-		void setAnswer(Answer a){ answer = a; }//todo - add or remove a numbered back if relevant rank && update Labels
-
-		void reveal(){  }//todo - animate the question revealing itself (flip while rotating in place && play sound)
-	}
-
-	private void setupQuestion(Question q){
+	protected void setupQuestion(Question q){
 	    //todo
     }
 
@@ -154,12 +117,12 @@ if(rank<4) {
 
 		VBox leftAnswers = new VBox();
 		for(int i=1; i<6; i++)
-            leftAnswers.getChildren().add(new AnswerTile(i));
+            leftAnswers.getChildren().add(new AnswerTile(this, i));
 		leftAnswers.setSpacing(screen.getHeight()/106.6);
 
 		VBox rightAnswers = new VBox();
         for(int i=6; i<11; i++)
-            rightAnswers.getChildren().add(new AnswerTile(i));
+            rightAnswers.getChildren().add(new AnswerTile(this, i));
         rightAnswers.setSpacing(screen.getHeight()/106.6);
 
         HBox answers = new HBox(leftAnswers, rightAnswers);
