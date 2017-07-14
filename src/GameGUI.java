@@ -3,8 +3,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
@@ -63,17 +63,24 @@ public class GameGUI extends Application{
 		Answer answer;
 		int value;
 
-		Label answerText;
-		Label valueText;
+		Text answerText;
+		Text valueText;
 
 		AnswerTile(int i){
             super();
 			rank  = i;
 			answerTiles.add(this);
-			setImageAsBackground(this, "blank answer tile.png", screen.getWidth()/3, screen.getHeight()/8);
-            answerText = new Label("My rank is " + rank);
-            valueText = new Label("And this is where the value goes");
+
+			setImageAsBackground(this, "revealed answer tile (unblurred).png", screen.getWidth()/3, screen.getHeight()/8.3);
+
+			answerText = new Text("Tile's rank: " + rank);
+            styleText(answerText, screen.getHeight()/12);
+			valueText = new Text("23");
+			styleText(valueText, screen.getHeight()/9);
+
 			HBox tile = new HBox(answerText, valueText);
+			this.getChildren().add(tile);
+
 			setTopAnchor(tile, 0.0);
 			setLeftAnchor(tile, 0.0);
 			setRightAnchor(tile, 0.0);
@@ -101,14 +108,20 @@ public class GameGUI extends Application{
 		BorderPane window = new BorderPane();
 		scene = new Scene(window);
 
+
+        //Setup the background of the program
+        Rectangle2D screen =Screen.getPrimary().getBounds();
+        setImageAsBackground(window, "background.png", screen.getWidth(), screen.getHeight());
+
+
 		//Areas for the team names, scores, and current question value
 		BorderPane top = new BorderPane();
 
 		VBox leftFamily = new VBox();
 		leftFamily.setAlignment(Pos.CENTER);
 		Text leftName = new Text("Hooffields");
+        styleText(leftName, screen.getHeight()/10.55);
 		Text leftPoints = new Text("6969");
-		styleText(leftName, screen.getHeight()/10.55);
 		styleText(leftPoints, screen.getHeight()/5.63);
 		leftFamily.getChildren().addAll(leftName, leftPoints);
 		top.setLeft(leftFamily);
@@ -123,8 +136,8 @@ public class GameGUI extends Application{
 		VBox rightFamily = new VBox();
 		rightFamily.setAlignment(Pos.CENTER);
 		Text rightName = new Text("McColts");
+        styleText(rightName, screen.getHeight()/10.55);
 		Text rightPoints = new Text("6969");
-		styleText(rightName, screen.getHeight()/10.55);
 		styleText(rightPoints, screen.getHeight()/5.63);
 		rightFamily.getChildren().addAll(rightName, rightPoints);
 		top.setRight(rightFamily);
@@ -133,20 +146,25 @@ public class GameGUI extends Application{
 
 		window.setTop(top);
 
-        //Setup the background of the program
-        Rectangle2D screen =Screen.getPrimary().getBounds();
-        setImageAsBackground(window, "background.png", screen.getWidth(), screen.getHeight());
 
 		//The area containing the actual answers
 		answerTiles = new ArrayList<>();
+
 		VBox leftAnswers = new VBox();
 		for(int i=1; i<6; i++)
             leftAnswers.getChildren().add(new AnswerTile(i));
+		leftAnswers.setSpacing(screen.getHeight()/150);
+
 		VBox rightAnswers = new VBox();
         for(int i=6; i<11; i++)
             rightAnswers.getChildren().add(new AnswerTile(i));
-		HBox answers = new HBox(leftAnswers, rightAnswers);
+        rightAnswers.setSpacing(screen.getHeight()/150);
+
+        HBox answers = new HBox(leftAnswers, rightAnswers);
+        answers.setSpacing(screen.getWidth()/150);
 		window.setCenter(answers);
+		BorderPane.setMargin(answers, new Insets(screen.getHeight()/21.4, 0, 0, screen.getWidth()/6.5));
+
 
 		//Handles user input with the program
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
@@ -177,9 +195,12 @@ public class GameGUI extends Application{
 			}
 		});
 
+
 		stage.setScene(scene);
 		stage.setTitle("Family Feud");
 		stage.setFullScreen(true);
+		stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH); //removes the esc hint and keeps it fullscreen
+        //todo - take a screenshot of completed look and use it as an icon
 		stage.show();
 	}
 
