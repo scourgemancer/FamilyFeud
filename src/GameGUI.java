@@ -60,17 +60,37 @@ public class GameGUI extends Application{
         region.setBackground( new Background(bi) );
     }
 
-	private void setupQuestion(Question q){
-	    for(int i=0; i<q.answers.size(); i++){
-	        answerTiles.get(i).setAnswer(q.answers.get(i));
+	private void setupQuestion(int i){
+        currentPoints = 0;
+        //todo - unhighlight the selected team
+        Question q = new Question("Will be replaced by the actual question");
+        if(i == 0){ //start from the beginning
+            currentQuestion = 0;
+            q = polls.questions.get(0);
+        }else if(i == -1){ //go backwards one question
+            if(currentQuestion > 0){
+                q = polls.questions.get(--currentQuestion);
+            }
+        }else if (i == 1){ //go forwards to the next question
+            if(currentQuestion < polls.questions.size()-1){
+                q = polls.questions.get(++currentQuestion);
+            }
         }
+	    for(int j=0; j<q.answers.size(); j++){
+	        answerTiles.get(j).setAnswer(q.answers.get(j));
+        }
+    }
+
+    public void scoreAnswer(int answerValue){
+	    //todo - animate the currentPoint value increasing
+        currentPoints += answerValue * multiplier;
     }
 
     private void scoreQuestion(){
 	    if(onLeft){
-	        leftTeam += currentPoints*multiplier;
+	        leftTeam += currentPoints;
         }else{
-	        rightTeam += currentPoints*multiplier;
+	        rightTeam += currentPoints;
         }
     }
 
@@ -142,6 +162,8 @@ public class GameGUI extends Application{
 		window.setCenter(answers);
 		BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/6.5));
 
+		setupQuestion(0);
+
 
 		//Handles user input with the program
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
@@ -157,11 +179,11 @@ public class GameGUI extends Application{
 				case "8": answerTiles.get(7).reveal(); break;
 				case "9": answerTiles.get(8).reveal(); break;
 				case "0": answerTiles.get(9).reveal(); break;
-/** restart */  case "r": currentQuestion=0; setupQuestion(polls.questions.get(0)); leftTeam=0; rightTeam=0; break;
-/** back */     case "b": if(currentQuestion > 0) currentQuestion--; setupQuestion(polls.questions.get(0)); break;
-/** next */     case "n": if(currentQuestion < polls.questions.size()-1)  break;
-/** theme */    case "t": playAudio("theme.mp3"); break; //theme song
-/** wrong */	case "x": playAudio("strike.mp3"); break; //strike sound
+/** restart */  case "r": setupQuestion(0); break;
+/** back */     case "b": setupQuestion(-1); break;
+/** next */     case "n": setupQuestion(1); break;
+/** theme */    case "t": playAudio("theme.mp3"); break;
+/** strike */	case "x": playAudio("strike.mp3"); break;
 /** stop */		case "s": stopAudio(); break; //stops all of the audio
 				case "Left": onLeft = true; break;
 				case "Right": onLeft = false; break;

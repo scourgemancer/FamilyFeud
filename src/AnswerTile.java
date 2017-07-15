@@ -27,7 +27,7 @@ public class AnswerTile extends BorderPane{
         gui.answerTiles.add(this);
 
         rankText = new Text(Integer.toString(rank));
-        gui.styleText(rankText, 10.0);
+        gui.styleText(rankText, gui.screen.getHeight()/11);
 
         setPrefSize(gui.screen.getWidth()/2.96, gui.screen.getHeight()/8.3);
 
@@ -38,24 +38,28 @@ public class AnswerTile extends BorderPane{
         answer = a;
         value = answer.points;
         isAnAnswer = true;
+        hidden = true;
 
         answerText = new Text(answer.answer);
         gui.styleText(answerText, gui.screen.getHeight()/12);
+        value = answer.points;
         valueText = new Text(Integer.toString(value));
         gui.styleText(valueText, gui.screen.getHeight()/9);
-        HBox tile = new HBox(answerText, valueText);
+        tile = new HBox(answerText, valueText);
 
         gui.setImageAsBackground(this, "numbered answer tile.png", gui.screen.getWidth()/2.96, gui.screen.getHeight()/8.3);
         this.setCenter(rankText);
     }
 
     void reveal(){
-        if(hidden){
+        if(hidden && isAnAnswer){
             gui.playAudio("reveal.mp3");
             gui.setImageAsBackground(this, "revealed answer tile.png", gui.screen.getWidth() / 2.96, gui.screen.getHeight() / 8.3);
             this.setCenter(tile);
+            hidden = false;
+            gui.scoreAnswer(value);
         }
-        //todo - animate the question revealing itself (flip while rotating in place && play sound)
+        //todo - animate the question revealing itself (flip while rotating in place && play sound && animate rising points)
     }
 
     void clear(){
