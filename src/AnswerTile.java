@@ -1,44 +1,67 @@
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 /**
  * Represents one of the tiles containing an answer and it's value for the GUI's
  */
-public class AnswerTile extends AnchorPane{
+public class AnswerTile extends BorderPane{
     int rank;
     Answer answer;
     int value;
 
+    GameGUI gui;
+
     Text answerText;
     Text valueText;
+    HBox tile;
+    Text rankText;
+
+    boolean hidden;
+    boolean isAnAnswer;
 
     AnswerTile(GameGUI gui, int i){
         super();
         rank  = i;
+        this.gui = gui;
         gui.answerTiles.add(this);
 
-        gui.setImageAsBackground(this, "revealed answer tile.png", gui.screen.getWidth()/2.96, gui.screen.getHeight()/8.3);
-        if(rank > 3) gui.setImageAsBackground(this, "numbered answer tile.png", gui.screen.getWidth()/2.96, gui.screen.getHeight()/8.3);
-        if(rank > 7) gui.setImageAsBackground(this, "blank answer tile.png", gui.screen.getWidth()/2.96, gui.screen.getHeight()/8.3);
-        if(rank<4) {
-            answerText = new Text("Tile's rank: " + rank);
-            gui.styleText(answerText, gui.screen.getHeight() / 12);
-            valueText = new Text("23");
-            gui.styleText(valueText, gui.screen.getHeight() / 9);
+        rankText = new Text(Integer.toString(rank));
+        gui.styleText(rankText, 10.0);
 
-            HBox tile = new HBox(answerText, valueText);
-            this.getChildren().add(tile);
-
-            setTopAnchor(tile, 0.0);
-            setLeftAnchor(tile, 0.0);
-            setRightAnchor(tile, 0.0);
-            setBottomAnchor(tile, 0.0);
-        }
         setPrefSize(gui.screen.getWidth()/2.96, gui.screen.getHeight()/8.3);
+
+        clear();
     }
 
-    void setAnswer(Answer a){ answer = a; }//todo - add or remove a numbered back if relevant rank && update Labels
+    void setAnswer(Answer a){
+        answer = a;
+        value = answer.points;
+        isAnAnswer = true;
 
-    void reveal(){  }//todo - animate the question revealing itself (flip while rotating in place && play sound)
+        gui.setImageAsBackground(this, "numbered answer tile.png", gui.screen.getWidth()/2.96, gui.screen.getHeight()/8.3);
+        this.getChildren().add(rankText);
+
+        answerText = new Text(answer.answer);
+        gui.styleText(answerText, gui.screen.getHeight()/12);
+        valueText = new Text(Integer.toString(value));
+        gui.styleText(valueText, gui.screen.getHeight()/9);
+        HBox tile = new HBox(answerText, valueText);
+    }
+
+    void reveal(){
+        if(hidden){
+            gui.playAudio("reveal.mp3");
+            gui.setImageAsBackground(this, "revealed answer tile.png", gui.screen.getWidth() / 2.96, gui.screen.getHeight() / 8.3);
+            this.setCenter(tile);
+        }
+        //todo - animate the question revealing itself (flip while rotating in place && play sound)
+    }
+
+    void clear(){
+        hidden = true;
+        isAnAnswer = false;
+        this.getChildren().clear();
+        gui.setImageAsBackground(this, "blank answer tile.png", gui.screen.getWidth()/2.96, gui.screen.getHeight()/8.3);
+    }
 }
