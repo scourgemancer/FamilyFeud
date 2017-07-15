@@ -24,17 +24,19 @@ public class GameGUI extends Application{
 	private Polls polls;
 	private Scene scene;
 	private Thread audio;
-	protected ArrayList<AnswerTile> answerTiles;
+	public ArrayList<AnswerTile> answerTiles;
 
 	String leftName = "Apple";
 	String rightName = "Pie";
 	int leftTeam, rightTeam = 0; //used for keeping track of team scores
 	boolean onLeft; //used to signify if the left team is highlighted or not
+	int currentQuestion = -1;
 	int multiplier = 1;
+	int currentPoints;
 
 	Rectangle2D screen; //used for increased readability when referencing the screen size
 
-	protected void playAudio(String filename){
+	public void playAudio(String filename){
 		stopAudio();
 		audio = new Thread(() -> {
 			Media hit = new Media("src\\resources\\" + filename);
@@ -43,14 +45,14 @@ public class GameGUI extends Application{
 		});
 	}
 
-	protected void stopAudio(){ if(audio != null) if(audio.isAlive()) audio.interrupt(); }
+	public void stopAudio(){ if(audio != null) if(audio.isAlive()) audio.interrupt(); }
 
-	protected void styleText(Text text, double size){
+	public void styleText(Text text, double size){
 		text.setFont(Font.font("Calibri", FontWeight.BLACK, size));
 		text.setStyle("-fx-fill: white; -fx-stroke: black; -fx-stroke-width: " + size/30 + "px");
 	}
 
-    protected void setImageAsBackground( Region region, String image, double width, double height ){
+    public void setImageAsBackground( Region region, String image, double width, double height ){
         BackgroundImage bi = new BackgroundImage(
                 new Image("resources\\" + image, width, height, false, true),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
@@ -58,8 +60,18 @@ public class GameGUI extends Application{
         region.setBackground( new Background(bi) );
     }
 
-	protected void setupQuestion(Question q){
-	    //todo
+	private void setupQuestion(Question q){
+	    for(int i=0; i<q.answers.size(); i++){
+	        answerTiles.get(i).setAnswer(q.answers.get(i));
+        }
+    }
+
+    private void scoreQuestion(){
+	    if(onLeft){
+	        leftTeam += currentPoints*multiplier;
+        }else{
+	        rightTeam += currentPoints*multiplier;
+        }
     }
 
 	@Override
@@ -86,23 +98,23 @@ public class GameGUI extends Application{
 		leftFamily.setAlignment(Pos.CENTER);
 		Text leftName = new Text("Hooffields");
         styleText(leftName, screen.getHeight()/10.55);
-		Text leftPoints = new Text("6969");
+		Text leftPoints = new Text("0");
 		styleText(leftPoints, screen.getHeight()/5.63);
 		leftFamily.getChildren().addAll(leftName, leftPoints);
 		top.setLeft(leftFamily);
 		leftFamily.setSpacing(screen.getHeight()/100);
 		BorderPane.setMargin(leftFamily, new Insets(screen.getHeight()/100, 0, 0, screen.getWidth()/28));
 
-		Text currentPoints = new Text("6969");
-		styleText(currentPoints, screen.getHeight()/4.69);
-		top.setCenter(currentPoints);
-		BorderPane.setMargin(currentPoints, new Insets(screen.getHeight()/15, screen.getWidth()/80, 0, 0));
+		Text currentPointsText = new Text("0");
+		styleText(currentPointsText, screen.getHeight()/4.69);
+		top.setCenter(currentPointsText);
+		BorderPane.setMargin(currentPointsText, new Insets(screen.getHeight()/15, screen.getWidth()/80, 0, 0));
 
 		VBox rightFamily = new VBox();
 		rightFamily.setAlignment(Pos.CENTER);
 		Text rightName = new Text("McColts");
         styleText(rightName, screen.getHeight()/10.55);
-		Text rightPoints = new Text("6969");
+		Text rightPoints = new Text("0");
 		styleText(rightPoints, screen.getHeight()/5.63);
 		rightFamily.getChildren().addAll(rightName, rightPoints);
 		top.setRight(rightFamily);
@@ -145,16 +157,17 @@ public class GameGUI extends Application{
 				case "8": answerTiles.get(7).reveal(); break;
 				case "9": answerTiles.get(8).reveal(); break;
 				case "0": answerTiles.get(9).reveal(); break;
-                case "b": break; //todo - back a question
-                case "n": break; //todo - next question
-				case "t": playAudio("theme.mp3"); break; //theme song
-				case "x": playAudio("strike.mp3"); break; //strike sound
-				case "s": stopAudio(); break; //stops all of the audio
+/** restart */  case "r": currentQuestion=0; setupQuestion(polls.questions.get(0)); leftTeam=0; rightTeam=0; break;
+/** back */     case "b": if(currentQuestion > 0) currentQuestion--; setupQuestion(polls.questions.get(0)); break;
+/** next */     case "n": if(currentQuestion < polls.questions.size()-1)  break;
+/** theme */    case "t": playAudio("theme.mp3"); break; //theme song
+/** wrong */	case "x": playAudio("strike.mp3"); break; //strike sound
+/** stop */		case "s": stopAudio(); break; //stops all of the audio
 				case "Left": onLeft = true; break;
 				case "Right": onLeft = false; break;
 				case "Up": multiplier++; break;
 				case "Down": if(multiplier > 1) multiplier--; break;
-                case "Space": break; //todo - increase current team's points
+                case "Space": scoreQuestion();
                 case "Backspace": break; //todo - undo
 				case "Enter": break; //todo - redoes if an action was just undone, else goes to fast money
 			}

@@ -39,14 +39,14 @@ public class AnswerTile extends BorderPane{
         value = answer.points;
         isAnAnswer = true;
 
-        gui.setImageAsBackground(this, "numbered answer tile.png", gui.screen.getWidth()/2.96, gui.screen.getHeight()/8.3);
-        this.getChildren().add(rankText);
-
         answerText = new Text(answer.answer);
         gui.styleText(answerText, gui.screen.getHeight()/12);
         valueText = new Text(Integer.toString(value));
         gui.styleText(valueText, gui.screen.getHeight()/9);
         HBox tile = new HBox(answerText, valueText);
+
+        gui.setImageAsBackground(this, "numbered answer tile.png", gui.screen.getWidth()/2.96, gui.screen.getHeight()/8.3);
+        this.setCenter(rankText);
     }
 
     void reveal(){
