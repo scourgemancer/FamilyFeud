@@ -29,6 +29,7 @@ public class GameGUI extends Application{
 	String leftName = "Apple";
 	String rightName = "Pie";
 	int leftTeam, rightTeam = 0; //used for keeping track of team scores
+	Text leftPoints, currentPointsText, rightPoints;
 	boolean onLeft; //used to signify if the left team is highlighted or not
 	int currentQuestion = -1;
 	int multiplier = 1;
@@ -84,14 +85,19 @@ public class GameGUI extends Application{
     public void scoreAnswer(int answerValue){
 	    //todo - animate the currentPoint value increasing
         currentPoints += answerValue * multiplier;
+        currentPointsText.setText(Integer.toString(currentPoints));
     }
 
     private void scoreQuestion(){
-	    if(onLeft){
+        //todo - animate the currentPoint value increasing
+        if(onLeft){
 	        leftTeam += currentPoints;
+	        leftPoints.setText(Integer.toString(leftTeam));
         }else{
 	        rightTeam += currentPoints;
+	        rightPoints.setText(Integer.toString(rightTeam));
         }
+        scoreAnswer(-currentPoints); //to reset the current unallocated points
     }
 
 	@Override
@@ -118,14 +124,14 @@ public class GameGUI extends Application{
 		leftFamily.setAlignment(Pos.CENTER);
 		Text leftName = new Text("Hooffields");
         styleText(leftName, screen.getHeight()/10.55);
-		Text leftPoints = new Text("0");
+		leftPoints = new Text("0");
 		styleText(leftPoints, screen.getHeight()/5.63);
 		leftFamily.getChildren().addAll(leftName, leftPoints);
 		top.setLeft(leftFamily);
 		leftFamily.setSpacing(screen.getHeight()/100);
 		BorderPane.setMargin(leftFamily, new Insets(screen.getHeight()/100, 0, 0, screen.getWidth()/28));
 
-		Text currentPointsText = new Text("0");
+		currentPointsText = new Text("0");
 		styleText(currentPointsText, screen.getHeight()/4.69);
 		top.setCenter(currentPointsText);
 		BorderPane.setMargin(currentPointsText, new Insets(screen.getHeight()/15, screen.getWidth()/80, 0, 0));
@@ -134,7 +140,7 @@ public class GameGUI extends Application{
 		rightFamily.setAlignment(Pos.CENTER);
 		Text rightName = new Text("McColts");
         styleText(rightName, screen.getHeight()/10.55);
-		Text rightPoints = new Text("0");
+		rightPoints = new Text("0");
 		styleText(rightPoints, screen.getHeight()/5.63);
 		rightFamily.getChildren().addAll(rightName, rightPoints);
 		top.setRight(rightFamily);
