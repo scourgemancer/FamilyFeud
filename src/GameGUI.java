@@ -64,6 +64,8 @@ public class GameGUI extends Application{
 	private void setupQuestion(int i){
         currentPoints = 0;
         //todo - unhighlight the selected team
+        for(AnswerTile tile: answerTiles)
+            tile.clear();
         Question q = new Question("Will be replaced by the actual question");
         if(i == 0){ //start from the beginning
             currentQuestion = 0;
@@ -77,9 +79,8 @@ public class GameGUI extends Application{
                 q = polls.questions.get(++currentQuestion);
             }
         }
-	    for(int j=0; j<q.answers.size(); j++){
+	    for(int j=0; j<q.answers.size(); j++)
 	        answerTiles.get(j).setAnswer(q.answers.get(j));
-        }
     }
 
     public void scoreAnswer(int answerValue){
@@ -174,7 +175,7 @@ public class GameGUI extends Application{
 		//Handles user input with the program
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
 			//todo - finish processing keyboard input here
-			switch(key.getCode().getName()){
+            switch(key.getCode().getName()){
 				case "1": answerTiles.get(0).reveal(); break;
 				case "2": answerTiles.get(1).reveal(); break;
 				case "3": answerTiles.get(2).reveal(); break;
@@ -185,12 +186,12 @@ public class GameGUI extends Application{
 				case "8": answerTiles.get(7).reveal(); break;
 				case "9": answerTiles.get(8).reveal(); break;
 				case "0": answerTiles.get(9).reveal(); break;
-/** restart */  case "r": setupQuestion(0); break;
-/** back */     case "b": setupQuestion(-1); break;
-/** next */     case "n": setupQuestion(1); break;
-/** theme */    case "t": playAudio("theme.mp3"); break;
-/** strike */	case "x": playAudio("strike.mp3"); break;
-/** stop */		case "s": stopAudio(); break; //stops all of the audio
+/** restart */  case "R": setupQuestion(0); break;
+/** back */     case "B": setupQuestion(-1); break;
+/** next */     case "N": setupQuestion(1); break;
+/** theme */    case "T": playAudio("theme.mp3"); break;
+/** strike */	case "X": playAudio("strike.mp3"); break;
+/** stop */		case "S": stopAudio(); break; //stops all of the audio
 				case "Left": onLeft = true; break;
 				case "Right": onLeft = false; break;
 				case "Up": multiplier++; break;
