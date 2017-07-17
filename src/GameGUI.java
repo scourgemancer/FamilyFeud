@@ -63,6 +63,7 @@ public class GameGUI extends Application{
 
 	private void setupQuestion(int i){
         currentPoints = 0;
+        currentPointsText.setText("0");
         //todo - unhighlight the selected team
         for(AnswerTile tile: answerTiles)
             tile.clear();
