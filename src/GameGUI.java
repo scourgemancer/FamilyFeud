@@ -21,27 +21,24 @@ import java.util.ArrayList;
  * The graphical view for the game and starting point of the program
  */
 public class GameGUI extends Application{
-	private Polls polls;
-	private Scene scene;
-	private Thread audio;
-	public ArrayList<AnswerTile> answerTiles;
+	private Polls polls; //holds all of the questions, which each hold their own answers
+	private Thread audio; //if not null, it's the audio being played at the moment
+    ArrayList<AnswerTile> answerTiles; //holds all of the ties in the center, ordered by rank
 
-	String leftName = "Apple";
-	String rightName = "Pie";
-	int leftTeam, rightTeam = 0; //used for keeping track of team scores
-	Text leftPoints, currentPointsText, rightPoints;
-	boolean onLeft; //used to signify if the left team is highlighted or not
-	int currentQuestion = -1;
-	int multiplier = 1;
-	int currentPoints;
+	private int leftTeam, rightTeam = 0; //used for keeping track of team scores
+	private Text leftPoints, currentPointsText, rightPoints;
+	private boolean onLeft; //used to signify if the left team is highlighted or not
+	private int currentQuestion = -1; //it is incremented to 1 before being used
+	private int multiplier = 1;
+	private int currentPoints;
 
 	Rectangle2D screen; //used for increased readability when referencing the screen size
 
 	public void playAudio(String filename){
 		stopAudio();
 		audio = new Thread(() -> {
-			Media hit = new Media("src\\resources\\" + filename);
-			MediaPlayer mediaPlayer = new MediaPlayer(hit);
+			Media audioFile = new Media("src\\resources\\" + filename);
+			MediaPlayer mediaPlayer = new MediaPlayer(audioFile);
 			mediaPlayer.play();
 		});
 	}
@@ -111,7 +108,7 @@ public class GameGUI extends Application{
 	@Override
 	public void start(Stage stage){
 		BorderPane window = new BorderPane();
-		scene = new Scene(window);
+		Scene scene = new Scene(window);
 
 
         //Setup the background of the program
