@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -34,14 +35,15 @@ public class GameGUI extends Application{
 
 	Rectangle2D screen; //used for increased readability when referencing the screen size
 
-	public void playAudio(String filename){
-		stopAudio();
-		audio = new Thread(() -> {
-			Media audioFile = new Media("src\\resources\\" + filename);
-			MediaPlayer mediaPlayer = new MediaPlayer(audioFile);
-			mediaPlayer.play();
-		});
-	}
+    public void playAudio(String filename){
+        stopAudio();
+        audio = new Thread(() -> {
+            Media audioFile = new Media(Paths.get("src/resources/" + filename).toUri().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(audioFile);
+            mediaPlayer.play();
+        });
+        audio.start();
+    }
 
 	public void stopAudio(){ if(audio != null) if(audio.isAlive()) audio.interrupt(); }
 
