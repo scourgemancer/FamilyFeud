@@ -23,7 +23,7 @@ import java.util.ArrayList;
  */
 public class GameGUI extends Application{
 	private Polls polls; //holds all of the questions, which each hold their own answers
-	private Thread audio; //if not null, it's the audio being played at the moment
+	private MediaPlayer audio; //is what plays the audio
     ArrayList<AnswerTile> answerTiles; //holds all of the ties in the center, ordered by rank
 
 	private int leftTeam, rightTeam = 0; //used for keeping track of team scores
@@ -36,16 +36,11 @@ public class GameGUI extends Application{
 	Rectangle2D screen; //used for increased readability when referencing the screen size
 
     public void playAudio(String filename){
-        stopAudio();
-        audio = new Thread(() -> {
-            Media audioFile = new Media(Paths.get("src/resources/" + filename).toUri().toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(audioFile);
-            mediaPlayer.play();
-        });
-        audio.start();
+        if(audio != null) audio.stop();
+        Media audioFile = new Media(Paths.get("src/resources/" + filename).toUri().toString());
+        audio = new MediaPlayer(audioFile);
+        audio.play();
     }
-
-	public void stopAudio(){ if(audio != null) if(audio.isAlive()) audio.interrupt(); }
 
 	public void styleText(Text text, double size){
 		text.setFont(Font.font("Calibri", FontWeight.BLACK, size));
@@ -191,7 +186,7 @@ public class GameGUI extends Application{
 /** next */     case "N": setupQuestion(1); break;
 /** theme */    case "T": playAudio("theme.mp3"); break;
 /** strike */	case "X": playAudio("strike.mp3"); break;
-/** stop */		case "S": stopAudio(); break; //stops all of the audio
+/** stop */		case "S": if(audio != null) audio.stop(); break;
 				case "Left": onLeft = true; break;
 				case "Right": onLeft = false; break;
 				case "Up": multiplier++; break;
