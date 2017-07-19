@@ -1,5 +1,6 @@
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.geometry.Insets;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 /**
@@ -20,6 +21,9 @@ public class AnswerTile extends BorderPane{
     boolean hidden;
     boolean isAnAnswer;
 
+    double width;
+    double height;
+
     AnswerTile(GameGUI gui, int i){
         super();
         rank  = i;
@@ -29,7 +33,9 @@ public class AnswerTile extends BorderPane{
         rankText = new Text(Integer.toString(rank));
         gui.styleText(rankText, gui.screen.getHeight()/11);
 
-        setPrefSize(gui.screen.getWidth()/2.96, gui.screen.getHeight()/8.3);
+        width = gui.screen.getWidth()/2.6225;
+        height = gui.screen.getHeight()/8.3;
+        setPrefSize(width, height);
 
         clear();
     }
@@ -49,14 +55,15 @@ public class AnswerTile extends BorderPane{
         gui.styleText(valueText, gui.screen.getHeight()/9);
         tile = new HBox(answerText, valueText);
 
-        gui.setImageAsBackground(this, "numbered answer tile.png", gui.screen.getWidth()/2.96, gui.screen.getHeight()/8.3);
+        gui.setImageAsBackground(this, "numbered answer tile.png", width, height);
+        //setBackground(new Background( new BackgroundFill(Paint.valueOf("blue"), CornerRadii.EMPTY, Insets.EMPTY)));
         this.setCenter(rankText);
     }
 
     void reveal(){
         if(hidden && isAnAnswer){
             gui.playAudio("reveal.mp3");
-            gui.setImageAsBackground(this, "revealed answer tile.png", gui.screen.getWidth() / 2.96, gui.screen.getHeight() / 8.3);
+            gui.setImageAsBackground(this, "revealed answer tile.png", width, height);
             this.setCenter(tile);
             hidden = false;
             gui.scoreAnswer(value);
@@ -68,6 +75,6 @@ public class AnswerTile extends BorderPane{
         hidden = true;
         isAnAnswer = false;
         this.getChildren().clear();
-        gui.setImageAsBackground(this, "blank answer tile.png", gui.screen.getWidth()/2.96, gui.screen.getHeight()/8.3);
+        gui.setImageAsBackground(this, "blank answer tile.png", width, height);
     }
 }

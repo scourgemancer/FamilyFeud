@@ -162,7 +162,7 @@ public class GameGUI extends Application{
         HBox answers = new HBox(leftAnswers, rightAnswers);
         answers.setSpacing(screen.getWidth()/150);
 		window.setCenter(answers);
-		BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/6.5));
+		BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/9.01));
 
 		setupQuestion(0);
 
