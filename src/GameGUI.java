@@ -130,7 +130,7 @@ public class GameGUI extends Application{
 		currentPointsText = new Text("0");
 		styleText(currentPointsText, screen.getHeight()/4.69);
 		top.setCenter(currentPointsText);
-		BorderPane.setMargin(currentPointsText, new Insets(screen.getHeight()/15, screen.getWidth()/80, 0, 0));
+		BorderPane.setMargin(currentPointsText, new Insets(screen.getHeight()/15, screen.getWidth()/30, 0, 0));
 
 		VBox rightFamily = new VBox();
 		rightFamily.setAlignment(Pos.CENTER);
@@ -141,7 +141,7 @@ public class GameGUI extends Application{
 		rightFamily.getChildren().addAll(rightName, rightPoints);
 		top.setRight(rightFamily);
 		rightFamily.setSpacing(screen.getHeight()/100);
-		BorderPane.setMargin(rightFamily, new Insets(screen.getHeight()/100, screen.getWidth()/18, 0, 0));
+		BorderPane.setMargin(rightFamily, new Insets(screen.getHeight()/100, screen.getWidth()/17, 0, 0));
 
 		window.setTop(top);
 

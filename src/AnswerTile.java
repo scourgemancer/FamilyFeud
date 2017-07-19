@@ -56,7 +56,6 @@ public class AnswerTile extends BorderPane{
         tile = new HBox(answerText, valueText);
 
         gui.setImageAsBackground(this, "numbered answer tile.png", width, height);
-        //setBackground(new Background( new BackgroundFill(Paint.valueOf("blue"), CornerRadii.EMPTY, Insets.EMPTY)));
         this.setCenter(rankText);
     }
 
