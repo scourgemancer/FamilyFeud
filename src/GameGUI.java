@@ -122,7 +122,8 @@ public class GameGUI extends Application{
             strikes.getChildren().addAll(img);
         }
 
-        //Actually pay the animation
+
+        //Actually play the animation
         playAudio("strike.mp3");
         appear.play();
     }
