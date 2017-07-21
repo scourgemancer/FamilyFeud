@@ -1,9 +1,12 @@
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -14,6 +17,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -32,6 +36,8 @@ public class GameGUI extends Application{
 	private int currentQuestion = -1; //it is incremented to 1 before being used
 	private int multiplier = 1;
 	private int currentPoints;
+	private int numWrong = 0;
+	private HBox strikes;
 
 	Rectangle2D screen; //used for increased readability when referencing the screen size
 
@@ -56,6 +62,7 @@ public class GameGUI extends Application{
     }
 
 	private void setupQuestion(int i){
+        numWrong = 0;
         currentPoints = 0;
         currentPointsText.setText("0");
         //todo - unhighlight the selected team
@@ -76,6 +83,48 @@ public class GameGUI extends Application{
         }
 	    for(int j=0; j<q.answers.size(); j++)
 	        answerTiles.get(j).setAnswer(q.answers.get(j));
+    }
+
+    private void wrongAnswer(){
+	    ++numWrong;
+
+	    //Make the strike images to appear
+	    ArrayList<ImageView> strikemarks = new ArrayList<>();
+	    for(int i=0; i<numWrong; i++)
+	        strikemarks.add( new ImageView(new Image("resources\\strike.png")) );
+
+
+	    //Make the transitions for the strikes to appear and disappear with
+        FadeTransition disappear = new FadeTransition(Duration.millis(50), strikes);
+        disappear.setFromValue(1);
+        disappear.setToValue(0);
+        disappear.setCycleCount(1);
+        disappear.setOnFinished(e -> strikes.getChildren().clear());
+
+        FadeTransition appear = new FadeTransition(Duration.millis(50), strikes);
+        appear.setFromValue(0);
+        appear.setToValue(1);
+        appear.setCycleCount(1);
+        appear.setOnFinished(e ->{
+            Platform.runLater(() -> {
+                try{
+                    Thread.sleep(1000); //done in a separate thread to not halt user input
+                }catch(Exception exc){exc.printStackTrace();}
+                disappear.play();
+            });
+        });
+
+
+        //Style the strikes and add them to the screen
+	    for(ImageView img : strikemarks){
+	        img.setPreserveRatio(true);
+	        img.setFitWidth(screen.getWidth()/5);
+            strikes.getChildren().addAll(img);
+        }
+
+        //Actually pay the animation
+        playAudio("strike.mp3");
+        appear.play();
     }
 
     public void scoreAnswer(int answerValue){
@@ -104,7 +153,11 @@ public class GameGUI extends Application{
 
 	@Override
 	public void start(Stage stage){
-		BorderPane window = new BorderPane();
+	    //Setup the overall stage and the top layer for strike animations
+		BorderPane game = new BorderPane();
+        strikes = new HBox();
+        strikes.setAlignment(Pos.CENTER);
+        StackPane window = new StackPane(game, strikes);
 		Scene scene = new Scene(window);
 
 
@@ -143,7 +196,7 @@ public class GameGUI extends Application{
 		rightFamily.setSpacing(screen.getHeight()/100);
 		BorderPane.setMargin(rightFamily, new Insets(screen.getHeight()/100, screen.getWidth()/17, 0, 0));
 
-		window.setTop(top);
+		game.setTop(top);
 
 
 		//The area containing the actual answers
@@ -161,7 +214,7 @@ public class GameGUI extends Application{
 
         HBox answers = new HBox(leftAnswers, rightAnswers);
         answers.setSpacing(screen.getWidth()/150);
-		window.setCenter(answers);
+		game.setCenter(answers);
 		BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/9.01));
 
 		setupQuestion(0);
@@ -185,7 +238,7 @@ public class GameGUI extends Application{
 /** back */     case "B": setupQuestion(-1); break;
 /** next */     case "N": setupQuestion(1); break;
 /** theme */    case "T": playAudio("theme.mp3"); break;
-/** strike */	case "X": playAudio("strike.mp3"); break;
+/** strike */	case "X": wrongAnswer(); break;
 /** stop */		case "S": if(audio != null) audio.stop(); break;
 				case "Left": onLeft = true; break;
 				case "Right": onLeft = false; break;
