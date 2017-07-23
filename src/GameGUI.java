@@ -32,7 +32,7 @@ public class GameGUI extends Application{
 
 	private int leftTeam, rightTeam = 0; //used for keeping track of team scores
 	private Text leftPoints, currentPointsText, rightPoints;
-	private boolean onLeft; //used to signify if the left team is highlighted or not
+	private int selectedTeam; //used to signify if the left(-1) or right(1) team is selected, or neither(0)
 	private int currentQuestion = -1; //it is incremented to 1 before being used
 	private int multiplier = 1;
 	private int currentPoints;
@@ -64,11 +64,11 @@ public class GameGUI extends Application{
     /** Highlights and selects the team given by -1(left), 0(deselect), and 1(right) */
     private void selectTeam(int team){
         if(team == -1){
-            onLeft = true;
+            selectedTeam = -1;
         }else if(team == 0){
-
+            selectedTeam = 0;
         }else  if(team == 1){
-            onLeft = false;
+            selectedTeam = 1;
         }
     }
 
@@ -147,14 +147,15 @@ public class GameGUI extends Application{
 
     private void scoreQuestion(){
         //todo - animate the currentPoint value increasing
-        if(onLeft){
+        if(selectedTeam == -1){
 	        leftTeam += currentPoints;
 	        leftPoints.setText(Integer.toString(leftTeam));
-        }else{
+            scoreAnswer(-currentPoints); //to reset the current unallocated points
+        }else if(selectedTeam == 1){
 	        rightTeam += currentPoints;
 	        rightPoints.setText(Integer.toString(rightTeam));
+            scoreAnswer(-currentPoints); //inside braces so it only triggers if a team is selected
         }
-        scoreAnswer(-currentPoints); //to reset the current unallocated points
     }
 
 	@Override
