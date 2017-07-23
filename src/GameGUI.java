@@ -38,6 +38,7 @@ public class GameGUI extends Application{
 	private int currentPoints;
 	private int numWrong = 0;
 	private HBox strikes;
+	private StackPane window;
 
 	Rectangle2D screen; //used for increased readability when referencing the screen size
 
@@ -65,10 +66,13 @@ public class GameGUI extends Application{
     private void selectTeam(int team){
         if(team == -1){
             selectedTeam = -1;
+            setImageAsBackground(window, "left team selected.png", screen.getWidth(), screen.getHeight());
         }else if(team == 0){
             selectedTeam = 0;
+            setImageAsBackground(window, "background.png", screen.getWidth(), screen.getHeight());
         }else  if(team == 1){
             selectedTeam = 1;
+            setImageAsBackground(window, "right team selected.png", screen.getWidth(), screen.getHeight());
         }
     }
 
@@ -76,9 +80,10 @@ public class GameGUI extends Application{
         numWrong = 0;
         currentPoints = 0;
         currentPointsText.setText("0");
-        //todo - unhighlight the selected team
+        selectTeam(0);
         for(AnswerTile tile: answerTiles)
             tile.clear();
+
         Question q = new Question("Will be replaced by the actual question");
         if(i == 0){ //start from the beginning
             currentQuestion = 0;
@@ -92,7 +97,8 @@ public class GameGUI extends Application{
                 q = polls.questions.get(++currentQuestion);
             }
         }
-	    for(int j=0; j<q.answers.size(); j++)
+
+        for(int j=0; j<q.answers.size(); j++)
 	        answerTiles.get(j).setAnswer(q.answers.get(j));
     }
 
@@ -170,7 +176,7 @@ public class GameGUI extends Application{
 		BorderPane game = new BorderPane();
         strikes = new HBox();
         strikes.setAlignment(Pos.CENTER);
-        StackPane window = new StackPane(game, strikes);
+        window = new StackPane(game, strikes);
 		Scene scene = new Scene(window);
 
 
