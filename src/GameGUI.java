@@ -61,6 +61,17 @@ public class GameGUI extends Application{
         region.setBackground( new Background(bi) );
     }
 
+    /** Highlights and selects the team given by -1(left), 0(deselect), and 1(right) */
+    private void selectTeam(int team){
+        if(team == -1){
+            onLeft = true;
+        }else if(team == 0){
+
+        }else  if(team == 1){
+            onLeft = false;
+        }
+    }
+
 	private void setupQuestion(int i){
         numWrong = 0;
         currentPoints = 0;
@@ -241,8 +252,8 @@ public class GameGUI extends Application{
 /** theme */    case "T": playAudio("theme.mp3"); break;
 /** strike */	case "X": wrongAnswer(); break;
 /** stop */		case "S": if(audio != null) audio.stop(); break;
-				case "Left": onLeft = true; break;
-				case "Right": onLeft = false; break;
+				case "Left": selectTeam(-1); break;
+				case "Right": selectTeam(1); break;
 				case "Up": multiplier++; break;
 				case "Down": if(multiplier > 1) multiplier--; break;
                 case "Space": scoreQuestion();
