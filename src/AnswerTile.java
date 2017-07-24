@@ -34,7 +34,7 @@ public class AnswerTile extends BorderPane{
         gui.styleText(rankText, gui.screen.getHeight()/11);
 
         width = gui.screen.getWidth()/2.6225;
-        height = gui.screen.getHeight()/8.3;
+        height = gui.screen.getHeight()/8.5714;
         setPrefSize(width, height);
 
         clear();
