@@ -167,7 +167,6 @@ public class GameGUI extends Application{
 	@Override
 	public void init(){
 		polls = new Polls("questions.txt");
-		screen = Screen.getPrimary().getVisualBounds();
 	}
 
 	@Override
@@ -181,7 +180,7 @@ public class GameGUI extends Application{
 
 
         //Setup the background of the program
-        Rectangle2D screen =Screen.getPrimary().getBounds();
+        screen = Screen.getPrimary().getBounds();
         setImageAsBackground(window, "background.png", screen.getWidth(), screen.getHeight());
 
 
