@@ -156,11 +156,13 @@ public class GameGUI extends Application{
         if(selectedTeam == -1){
 	        leftTeam += currentPoints;
 	        leftPoints.setText(Integer.toString(leftTeam));
-            scoreAnswer(-currentPoints); //to reset the current unallocated points
+            currentPoints = 0; //inside braces so it only triggers if a team is selected
+            currentPointsText.setText("0");
         }else if(selectedTeam == 1){
 	        rightTeam += currentPoints;
 	        rightPoints.setText(Integer.toString(rightTeam));
-            scoreAnswer(-currentPoints); //inside braces so it only triggers if a team is selected
+            currentPoints = 0;
+            currentPointsText.setText("0");
         }
     }
 
