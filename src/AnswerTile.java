@@ -63,10 +63,10 @@ public class AnswerTile extends BorderPane{
         back.setRotationAxis(Rotate.X_AXIS);
         back.setRotate(180);
 
-        Rectangle top = new Rectangle(width, depth, Paint.valueOf("blue"));
+        Rectangle top = new Rectangle(width, depth, Paint.valueOf("#D3D3D3"));
         top.setRotationAxis(Rotate.X_AXIS);
         top.setRotate(90);
-        top.setTranslateY(height/2);
+        top.setTranslateY(-height/2);
 
         this.getChildren().addAll( new Group(back, top, front) );
 
@@ -74,6 +74,9 @@ public class AnswerTile extends BorderPane{
         flip.setAxis(Rotate.X_AXIS);
         flip.setByAngle(-180);
         flip.setCycleCount(1);
+
+        this.setRotationAxis(Rotate.X_AXIS);
+        this.setRotate(-15);
     }
 
     void setAnswer(Answer a){
@@ -100,16 +103,7 @@ public class AnswerTile extends BorderPane{
         if(hidden && isAnAnswer){
             gui.playAudio("reveal.mp3");
             hidden = false;
-
-            //The fade-in animation for the contents
-            this.setCenter(tile);
-            FadeTransition appear = new FadeTransition(Duration.millis(100), tile);
-            appear.setFromValue(0);
-            appear.setToValue(1);
-            appear.setCycleCount(1);
-
             flip.play();
-            appear.play();
             gui.scoreAnswer(value);
         }
     }
