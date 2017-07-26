@@ -67,7 +67,7 @@ public class AnswerTile extends BorderPane{
             hidden = false;
             gui.scoreAnswer(value);
         }
-        //todo - animate the question revealing itself (flip while rotating in place && play sound && animate rising points)
+        //todo - animate the question revealing itself (flip while rotating in place && play sound)
     }
 
     void clear(){

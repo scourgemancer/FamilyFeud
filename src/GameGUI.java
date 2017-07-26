@@ -146,13 +146,11 @@ public class GameGUI extends Application{
     }
 
     public void scoreAnswer(int answerValue){
-	    //todo - animate the currentPoint value increasing (timeline)
         currentPoints += answerValue * multiplier;
         currentPointsText.setText(Integer.toString(currentPoints));
     }
 
     private void scoreQuestion(){
-        //todo - animate the currentPoint value increasing (timeline)
         if(selectedTeam == -1){
 	        leftTeam += currentPoints;
 	        leftPoints.setText(Integer.toString(leftTeam));
