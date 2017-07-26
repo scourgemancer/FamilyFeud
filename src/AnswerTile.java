@@ -1,6 +1,6 @@
 import javafx.geometry.Insets;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 /**
@@ -55,14 +55,22 @@ public class AnswerTile extends BorderPane{
         gui.styleText(valueText, gui.screen.getHeight()/9);
         tile = new HBox(answerText, valueText);
 
-        gui.setImageAsBackground(this, "numbered answer tile.png", width, height);
+        this.getChildren().clear();
+        ImageView front = new ImageView("resources\\numbered answer tile.png");
+        front.setFitHeight(height);
+        front.setFitWidth(width);
+        this.getChildren().add(front);
         this.setCenter(rankText);
     }
 
     void reveal(){
         if(hidden && isAnAnswer){
             gui.playAudio("reveal.mp3");
-            gui.setImageAsBackground(this, "revealed answer tile.png", width, height);
+            this.getChildren().clear();
+            ImageView front = new ImageView("resources\\revealed answer tile.png");
+            front.setFitHeight(height);
+            front.setFitWidth(width);
+            this.getChildren().add(front);
             this.setCenter(tile);
             hidden = false;
             gui.scoreAnswer(value);
@@ -74,6 +82,9 @@ public class AnswerTile extends BorderPane{
         hidden = true;
         isAnAnswer = false;
         this.getChildren().clear();
-        gui.setImageAsBackground(this, "blank answer tile.png", width, height);
+        ImageView front = new ImageView("resources\\blank answer tile.png");
+        front.setFitHeight(height);
+        front.setFitWidth(width);
+        this.getChildren().add(front);
     }
 }
