@@ -1,7 +1,9 @@
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 /**
  * Represents one of the tiles containing an answer and it's value for the GUI's
@@ -15,7 +17,7 @@ public class AnswerTile extends BorderPane{
 
     Text answerText;
     Text valueText;
-    HBox tile;
+    BorderPane tile;
     Text rankText;
 
     boolean hidden;
@@ -50,10 +52,18 @@ public class AnswerTile extends BorderPane{
         gui.styleText(answerText, gui.screen.getHeight()/12);
         answerText.setWrappingWidth(gui.screen.getWidth()/4);
         answerText.setLineSpacing(-30);
+
         value = answer.points;
         valueText = new Text(Integer.toString(value));
         gui.styleText(valueText, gui.screen.getHeight()/9);
-        tile = new HBox(answerText, valueText);
+
+        tile = new BorderPane();
+        tile.setLeft(answerText);
+        BorderPane.setAlignment(answerText, Pos.CENTER_LEFT);
+        BorderPane.setMargin(answerText, new Insets(0, 0, 0, width/75));
+        tile.setRight(valueText);
+        BorderPane.setAlignment(valueText, Pos.CENTER_RIGHT);
+        BorderPane.setMargin(valueText, new Insets(0, width/75, 0, 0));
 
         this.getChildren().clear();
         ImageView front = new ImageView("resources\\numbered answer tile.png");
@@ -72,7 +82,6 @@ public class AnswerTile extends BorderPane{
             front.setFitWidth(width);
             this.getChildren().add(front);
             this.setCenter(tile);
-            BorderPane.setMargin(tile, new Insets(height/6, 0, 0, width/75));
             hidden = false;
             gui.scoreAnswer(value);
         }
