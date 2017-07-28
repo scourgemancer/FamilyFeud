@@ -72,6 +72,7 @@ public class AnswerTile extends BorderPane{
             front.setFitWidth(width);
             this.getChildren().add(front);
             this.setCenter(tile);
+            BorderPane.setMargin(tile, new Insets(height/6, 0, 0, width/75));
             hidden = false;
             gui.scoreAnswer(value);
         }
