@@ -8,22 +8,22 @@ import javafx.scene.text.Text;
  * Represents one of the tiles containing an answer and it's value for the GUI's
  */
 public class AnswerTile extends BorderPane{
+    private Answer answer;
     int rank;
-    Answer answer;
     int value;
 
-    GameGUI gui;
+    private GameGUI gui;
 
     Text answerText;
     Text valueText;
-    BorderPane tile;
     Text rankText;
+    private BorderPane tile;
 
     boolean hidden;
     boolean isAnAnswer;
 
-    double width;
-    double height;
+    private double width;
+    private double height;
 
     AnswerTile(GameGUI gui, int i){
         super();
