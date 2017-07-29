@@ -62,7 +62,11 @@ public class AnswerTile extends BorderPane{
         BorderPane.setMargin(answerText, new Insets(0, 0, 0, width/75));
         tile.setRight(valueText);
         BorderPane.setAlignment(valueText, Pos.CENTER_RIGHT);
-        BorderPane.setMargin(valueText, new Insets(0, width/75, 0, 0));
+        if(valueText.getText().length() < 2){
+            BorderPane.setMargin(valueText, new Insets(0, width/19, 0, 0));
+        }else{
+            BorderPane.setMargin(valueText, new Insets(0, width/75, 0, 0));
+        }
 
         this.getChildren().clear();
         ImageView front = new ImageView("resources\\numbered answer tile.png");
