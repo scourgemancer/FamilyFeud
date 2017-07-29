@@ -49,8 +49,11 @@ public class AnswerTile extends BorderPane{
 
         answerText = new Text(answer.answer);
         gui.styleText(answerText, gui.screen.getHeight()/12);
-        answerText.setWrappingWidth(gui.screen.getWidth()/4);
-        answerText.setLineSpacing(-30);
+
+        //Removes a character from the end of the text until it fits in the box
+        while(answerText.getBoundsInLocal().getWidth() > ((gui.screen.getWidth()/2.6225)*(11.0/14.0))){
+            answerText.setText(answerText.getText().substring(0, answerText.getText().length()-1));
+        }
 
         value = answer.points;
         valueText = new Text(Integer.toString(value));
