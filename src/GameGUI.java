@@ -260,7 +260,7 @@ public class GameGUI extends Application{
 /** stop */		case "S": if(audio != null) audio.stop(); break;
 				case "Left": selectTeam(-1); break;
 				case "Right": selectTeam(1); break;
-				case "Up": multiplier++; break;
+				case "Up": multiplier++; break; //TODO - put up the multiplier on the screen
 				case "Down": if(multiplier > 1) multiplier--; break;
                 case "Space": scoreQuestion();
                 case "Backspace": break; //todo - undo
