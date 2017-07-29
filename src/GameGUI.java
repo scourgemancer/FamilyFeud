@@ -273,7 +273,7 @@ public class GameGUI extends Application{
 		stage.setTitle("Family Feud");
 		stage.setFullScreen(true);
 		stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH); //removes the esc hint and keeps it fullscreen
-        //todo - take a screenshot of completed look and use it as an icon
+        stage.getIcons().add(new Image("resources\\icon.png"));
 		stage.show();
 	}
 
