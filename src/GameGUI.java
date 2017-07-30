@@ -30,6 +30,8 @@ public class GameGUI extends Application{
 	private MediaPlayer audio; //is what plays the audio
     ArrayList<AnswerTile> answerTiles; //holds all of the ties in the center, ordered by rank
 
+    private Caretaker caretaker; //what saves the game and provides the undo and redo features
+
 	private int leftTeam, rightTeam = 0; //used for keeping track of team scores
 	private Text leftPoints, currentPointsText, rightPoints;
 	private int selectedTeam; //used to signify if the left(-1) or right(1) team is selected, or neither(0)
@@ -167,6 +169,7 @@ public class GameGUI extends Application{
 	@Override
 	public void init(){
 		polls = new Polls("questions.txt");
+		caretaker = new Caretaker(this);
 	}
 
 	@Override
@@ -240,31 +243,30 @@ public class GameGUI extends Application{
 
 		//Handles user input with the program
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-			//todo - finish processing keyboard input here
             switch(key.getCode().getName()){
-				case "1": answerTiles.get(0).reveal(); break;
-				case "2": answerTiles.get(1).reveal(); break;
-				case "3": answerTiles.get(2).reveal(); break;
-				case "4": answerTiles.get(3).reveal(); break;
-				case "5": answerTiles.get(4).reveal(); break;
-				case "6": answerTiles.get(5).reveal(); break;
-				case "7": answerTiles.get(6).reveal(); break;
-				case "8": answerTiles.get(7).reveal(); break;
-				case "9": answerTiles.get(8).reveal(); break;
-				case "0": answerTiles.get(9).reveal(); break;
-/** restart */  case "R": setupQuestion(0); break;
-/** back */     case "B": setupQuestion(-1); break;
-/** next */     case "N": setupQuestion(1); break;
+				case "1": caretaker.save(); answerTiles.get(0).reveal(); break;
+				case "2": caretaker.save(); answerTiles.get(1).reveal(); break;
+				case "3": caretaker.save(); answerTiles.get(2).reveal(); break;
+				case "4": caretaker.save(); answerTiles.get(3).reveal(); break;
+				case "5": caretaker.save(); answerTiles.get(4).reveal(); break;
+				case "6": caretaker.save(); answerTiles.get(5).reveal(); break;
+				case "7": caretaker.save(); answerTiles.get(6).reveal(); break;
+				case "8": caretaker.save(); answerTiles.get(7).reveal(); break;
+				case "9": caretaker.save(); answerTiles.get(8).reveal(); break;
+				case "0": caretaker.save(); answerTiles.get(9).reveal(); break;
+/** restart */  case "R": caretaker.save(); setupQuestion(0); break;
+/** back */     case "B": caretaker.save(); setupQuestion(-1); break;
+/** next */     case "N": caretaker.save(); setupQuestion(1); break;
 /** theme */    case "T": playAudio("theme.mp3"); break;
-/** strike */	case "X": wrongAnswer(); break;
+/** strike */	case "X": caretaker.save(); wrongAnswer(); break;
 /** stop */		case "S": if(audio != null) audio.stop(); break;
 				case "Left": selectTeam(-1); break;
 				case "Right": selectTeam(1); break;
-				case "Up": multiplier++; break; //TODO - put up the multiplier on the screen
-				case "Down": if(multiplier > 1) multiplier--; break;
-                case "Space": scoreQuestion();
-                case "Backspace": break; //todo - undo
-				case "Enter": break; //todo - redoes if an action was just undone, else goes to fast money
+				case "Up": caretaker.save(); multiplier++; break; //TODO - put up the multiplier on the screen
+				case "Down": caretaker.save(); if(multiplier > 1) multiplier--; break;
+/** score */    case "Space": caretaker.save(); scoreQuestion(); break;
+/** undo */     case "Backspace": caretaker.undo(); break;
+/** redo */ 	case "Enter": caretaker.redo(); break;
 			}
 		});
 

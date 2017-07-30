@@ -3,10 +3,26 @@
  */
 public class Memento{
     Memento(GameGUI gui){
-        //todo - implement once everything else is done
+        /**
+         * Things to save:
+         * todo - Each tile being revealed/hidden
+         * todo - The current question
+         * todo - The number of strikes
+         * todo - The multiplier
+         * todo - Each team's points
+         * todo - Unallocated points
+         */
     }
 
     public void reinstate(){
-        //todo - implement
+        /**
+         * Things to reinstate:
+         * todo - Each tile being revealed/hidden
+         * todo - The current question
+         * todo - The number of strikes
+         * todo - The multiplier
+         * todo - Each team's points
+         * todo - Unallocated points
+         */
     }
 }

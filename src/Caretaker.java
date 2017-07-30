@@ -9,15 +9,32 @@ public class Caretaker{
 
     private boolean canRedo;
 
+    private GameGUI gui;
+
+    Caretaker(GameGUI gui){
+        this.gui = gui;
+        canRedo = false;
+        undos = new Stack<Memento>();
+        redos = new Stack<Memento>();
+    }
+
     public void save(){
-        //todo - implement
+        undos.push(new Memento(gui));
+        canRedo = false;
+        if(!redos.empty()) redos = new Stack<Memento>();
     }
 
     public void undo(){
-        //todo - implement
+        redos.push(new Memento(gui));
+        undos.pop().reinstate();
+        canRedo = true;
     }
 
     public void redo(){
-        //todo - implement
+        if(canRedo && !redos.empty()){
+            undos.push(new Memento(gui));
+            redos.pop().reinstate();
+        }
+
     }
 }
