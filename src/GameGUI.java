@@ -33,12 +33,12 @@ public class GameGUI extends Application{
 
     private Caretaker caretaker; //what saves the game and provides the undo and redo features
 
-	private int leftTeam, rightTeam = 0; //used for keeping track of team scores
-	private Text leftPoints, currentPointsText, rightPoints;
+	int leftTeam, rightTeam = 0; //used for keeping track of team scores
+	Text leftPoints, currentPointsText, rightPoints;
 	private int selectedTeam; //used to signify if the left(-1) or right(1) team is selected, or neither(0)
-	private int multiplier = 1;
-	private int currentPoints;
-	private int numWrong = 0;
+	int multiplier = 1;
+	int currentPoints;
+	int numWrong = 0;
 	private HBox strikes;
 	private StackPane window;
 
@@ -103,12 +103,10 @@ public class GameGUI extends Application{
 	    multiplier = 1;
     }
 
-    private void wrongAnswer(){
-	    ++numWrong;
-
+    private void wrongAnswer(int wrong){
 	    //Make the strike images to appear
 	    ArrayList<ImageView> strikemarks = new ArrayList<>();
-	    for(int i=0; i<numWrong; i++)
+	    for(int i=0; i<wrong; i++)
 	        strikemarks.add( new ImageView(new Image("resources\\strike.png")) );
 
 
@@ -257,7 +255,7 @@ public class GameGUI extends Application{
 /** back */     case "B": caretaker.save(); setupQuestion(--currentQuestion); break;
 /** next */     case "N": caretaker.save(); setupQuestion(++currentQuestion); break;
 /** theme */    case "T": playAudio("theme.mp3"); break;
-/** strike */	case "X": caretaker.save(); wrongAnswer(); break;
+/** strike */	case "X": caretaker.save(); wrongAnswer(++numWrong); break;
 /** stop */		case "S": if(audio != null) audio.stop(); break;
 				case "Left": selectTeam(-1); break;
 				case "Right": selectTeam(1); break;
