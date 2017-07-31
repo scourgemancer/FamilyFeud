@@ -27,6 +27,7 @@ import java.util.ArrayList;
  */
 public class GameGUI extends Application{
 	private Polls polls; //holds all of the questions, which each hold their own answers
+    int currentQuestion = 0;
 	private MediaPlayer audio; //is what plays the audio
     ArrayList<AnswerTile> answerTiles; //holds all of the ties in the center, ordered by rank
 
@@ -35,7 +36,6 @@ public class GameGUI extends Application{
 	private int leftTeam, rightTeam = 0; //used for keeping track of team scores
 	private Text leftPoints, currentPointsText, rightPoints;
 	private int selectedTeam; //used to signify if the left(-1) or right(1) team is selected, or neither(0)
-	private int currentQuestion = -1; //it is incremented to 1 before being used
 	private int multiplier = 1;
 	private int currentPoints;
 	private int numWrong = 0;
@@ -86,22 +86,21 @@ public class GameGUI extends Application{
         for(AnswerTile tile: answerTiles)
             tile.clear();
 
-        Question q = new Question("Will be replaced by the actual question");
-        if(i == 0){ //start from the beginning
-            currentQuestion = 0;
-            q = polls.questions.get(0);
-        }else if(i == -1){ //go backwards one question
-            if(currentQuestion > 0){
-                q = polls.questions.get(--currentQuestion);
-            }
-        }else if (i == 1){ //go forwards to the next question
-            if(currentQuestion < polls.questions.size()-1){
-                q = polls.questions.get(++currentQuestion);
-            }
-        }
+        if(currentQuestion < 0) currentQuestion = 0;
+        if(currentQuestion > polls.questions.size()-1) currentQuestion = polls.questions.size()-1;
+        Question q = polls.questions.get(i);
 
         for(int j=0; j<q.answers.size(); j++)
 	        answerTiles.get(j).setAnswer(q.answers.get(j));
+    }
+
+    private void restart(){
+	    setupQuestion(0);
+	    leftTeam = 0;
+	    leftPoints.setText("0");
+	    rightTeam = 0;
+	    rightPoints.setText("0");
+	    multiplier = 1;
     }
 
     private void wrongAnswer(){
@@ -254,9 +253,9 @@ public class GameGUI extends Application{
 				case "8": caretaker.save(); answerTiles.get(7).reveal(); break;
 				case "9": caretaker.save(); answerTiles.get(8).reveal(); break;
 				case "0": caretaker.save(); answerTiles.get(9).reveal(); break;
-/** restart */  case "R": caretaker.save(); setupQuestion(0); break;
-/** back */     case "B": caretaker.save(); setupQuestion(-1); break;
-/** next */     case "N": caretaker.save(); setupQuestion(1); break;
+/** restart */  case "R": caretaker.save(); restart(); break;
+/** back */     case "B": caretaker.save(); setupQuestion(--currentQuestion); break;
+/** next */     case "N": caretaker.save(); setupQuestion(++currentQuestion); break;
 /** theme */    case "T": playAudio("theme.mp3"); break;
 /** strike */	case "X": caretaker.save(); wrongAnswer(); break;
 /** stop */		case "S": if(audio != null) audio.stop(); break;
