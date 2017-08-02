@@ -102,7 +102,7 @@ public class GameGUI extends Application{
 	    leftPoints.setText("0");
 	    rightTeam = 0;
 	    rightPoints.setText("0");
-	    multiplier = 1;
+	    setMultiplier(1);
     }
 
     private void wrongAnswer(int wrong){
@@ -172,8 +172,12 @@ public class GameGUI extends Application{
             leftMultiplier.setText("");
             rightMultiplier.setText("");
         }else{
+            styleText(leftMultiplier, screen.getHeight()/7);
             leftMultiplier.setText(Integer.toString(multiplier) + "x");
+            styleText(rightMultiplier, screen.getHeight()/7);
             rightMultiplier.setText(Integer.toString(multiplier) + "x");
+            //todo - change the answerTile's margins to accommodate their neighbour
+            //todo - change margins and text size for double digits
         }
     }
 
@@ -233,12 +237,10 @@ public class GameGUI extends Application{
 
 		//The multiplier symbols
 		leftMultiplier = new Text("");
-		styleText(leftMultiplier, screen.getHeight()/7);
 		game.setLeft(leftMultiplier);
 		BorderPane.setAlignment(leftMultiplier, Pos.CENTER_LEFT);
 
 		rightMultiplier = new Text("");
-		styleText(rightMultiplier, screen.getHeight()/7);
 		game.setRight(rightMultiplier);
 		BorderPane.setAlignment(rightMultiplier, Pos.CENTER_RIGHT);
 
