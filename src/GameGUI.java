@@ -39,6 +39,8 @@ public class GameGUI extends Application{
 	int multiplier = 1;
 	int currentPoints;
 	int numWrong = 0;
+	private Text leftMultiplier;
+	private Text rightMultiplier;
 	private HBox strikes;
 	private StackPane window;
 
@@ -163,7 +165,19 @@ public class GameGUI extends Application{
         }
     }
 
-	@Override
+    public void setMultiplier(int newMultiplier){
+        if(newMultiplier < 1) return;
+        this.multiplier = newMultiplier;
+        if(multiplier == 1){
+            leftMultiplier.setText("");
+            rightMultiplier.setText("");
+        }else{
+            leftMultiplier.setText(Integer.toString(multiplier) + "x");
+            rightMultiplier.setText(Integer.toString(multiplier) + "x");
+        }
+    }
+
+    @Override
 	public void init(){
 		polls = new Polls("questions.txt");
 		caretaker = new Caretaker(this);
@@ -217,6 +231,18 @@ public class GameGUI extends Application{
 		game.setTop(top);
 
 
+		//The multiplier symbols
+		leftMultiplier = new Text("");
+		styleText(leftMultiplier, screen.getHeight()/7);
+		game.setLeft(leftMultiplier);
+		BorderPane.setAlignment(leftMultiplier, Pos.CENTER_LEFT);
+
+		rightMultiplier = new Text("");
+		styleText(rightMultiplier, screen.getHeight()/7);
+		game.setRight(rightMultiplier);
+		BorderPane.setAlignment(rightMultiplier, Pos.CENTER_RIGHT);
+
+
 		//The area containing the actual answers
 		answerTiles = new ArrayList<>();
 
@@ -259,8 +285,8 @@ public class GameGUI extends Application{
 /** stop */		case "S": if(audio != null) audio.stop(); break;
 				case "Left": selectTeam(-1); break;
 				case "Right": selectTeam(1); break;
-				case "Up": caretaker.save(); multiplier++; break; //TODO - put up the multiplier on the screen
-				case "Down": caretaker.save(); if(multiplier > 1) multiplier--; break;
+				case "Up": caretaker.save(); setMultiplier(multiplier+1); break;
+				case "Down": caretaker.save(); setMultiplier(multiplier-1); break;
 /** score */    case "Space": caretaker.save(); scoreQuestion(); break;
 /** undo */     case "Backspace": caretaker.undo(); break;
 /** redo */ 	case "Enter": caretaker.redo(); break;
