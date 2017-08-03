@@ -79,9 +79,10 @@ public class AnswerTile extends BorderPane{
         this.setCenter(rankText);
     }
 
-    void reveal(){
+    void reveal(boolean isVisible){
         if(hidden && isAnAnswer){
-            gui.playAudio("reveal.mp3");
+            gui.caretaker.save();
+            if(isVisible) gui.playAudio("reveal.mp3");
             this.getChildren().clear();
             ImageView front = new ImageView("resources\\revealed answer tile.png");
             front.setFitHeight(height);
@@ -90,8 +91,20 @@ public class AnswerTile extends BorderPane{
             this.setCenter(tile);
             hidden = false;
             gui.scoreAnswer(value);
+            if(isVisible){
+                //todo - animate the question revealing itself (flip while rotating in place && play sound)
+            }
         }
-        //todo - animate the question revealing itself (flip while rotating in place && play sound)
+    }
+
+    void hide(){
+        this.getChildren().clear();
+        ImageView front = new ImageView("resources\\numbered answer tile.png");
+        front.setFitHeight(height);
+        front.setFitWidth(width);
+        this.getChildren().add(front);
+        this.setCenter(rankText);
+        hidden = true;
     }
 
     void clear(){

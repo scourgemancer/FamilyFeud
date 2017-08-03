@@ -31,7 +31,7 @@ public class GameGUI extends Application{
 	private MediaPlayer audio; //is what plays the audio
     ArrayList<AnswerTile> answerTiles; //holds all of the ties in the center, ordered by rank
 
-    private Caretaker caretaker; //what saves the game and provides the undo and redo features
+    Caretaker caretaker; //what saves the game and provides the undo and redo features
 
 	int leftTeam, rightTeam = 0; //used for keeping track of team scores
 	Text leftPoints, currentPointsText, rightPoints;
@@ -279,16 +279,16 @@ public class GameGUI extends Application{
 		//Handles user input with the program
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             switch(key.getCode().getName()){
-				case "1": caretaker.save(); answerTiles.get(0).reveal(); break;
-				case "2": caretaker.save(); answerTiles.get(1).reveal(); break;
-				case "3": caretaker.save(); answerTiles.get(2).reveal(); break;
-				case "4": caretaker.save(); answerTiles.get(3).reveal(); break;
-				case "5": caretaker.save(); answerTiles.get(4).reveal(); break;
-				case "6": caretaker.save(); answerTiles.get(5).reveal(); break;
-				case "7": caretaker.save(); answerTiles.get(6).reveal(); break;
-				case "8": caretaker.save(); answerTiles.get(7).reveal(); break;
-				case "9": caretaker.save(); answerTiles.get(8).reveal(); break;
-				case "0": caretaker.save(); answerTiles.get(9).reveal(); break;
+				case "1": answerTiles.get(0).reveal(true); break;
+				case "2": answerTiles.get(1).reveal(true); break;
+				case "3": answerTiles.get(2).reveal(true); break;
+				case "4": answerTiles.get(3).reveal(true); break;
+				case "5": answerTiles.get(4).reveal(true); break;
+				case "6": answerTiles.get(5).reveal(true); break;
+				case "7": answerTiles.get(6).reveal(true); break;
+				case "8": answerTiles.get(7).reveal(true); break;
+				case "9": answerTiles.get(8).reveal(true); break;
+				case "0": answerTiles.get(9).reveal(true); break;
 /** restart */  case "R": caretaker.save(); restart(); break;
 /** back */     case "B": caretaker.save(); setupQuestion(--currentQuestion); break;
 /** next */     case "N": caretaker.save(); setupQuestion(++currentQuestion); break;
