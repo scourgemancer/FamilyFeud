@@ -42,6 +42,7 @@ public class GameGUI extends Application{
 	private Text leftMultiplier;
 	private Text rightMultiplier;
 	private HBox strikes;
+	private HBox answers;
 	private StackPane window;
 
 	Rectangle2D screen; //used for increased readability when referencing the screen size
@@ -170,13 +171,15 @@ public class GameGUI extends Application{
         this.multiplier = newMultiplier;
         if(multiplier == 1){
             leftMultiplier.setText("");
+            BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/9.01));
             rightMultiplier.setText("");
+
         }else{
             styleText(leftMultiplier, screen.getHeight()/7);
             leftMultiplier.setText(Integer.toString(multiplier) + "x");
+            BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/30));
             styleText(rightMultiplier, screen.getHeight()/7);
             rightMultiplier.setText(Integer.toString(multiplier) + "x");
-            //todo - change the answerTile's margins to accommodate their neighbour
             //todo - change margins and text size for double digits
         }
     }
@@ -258,7 +261,7 @@ public class GameGUI extends Application{
             rightAnswers.getChildren().add(new AnswerTile(this, i));
         rightAnswers.setSpacing(screen.getHeight()/106.6);
 
-        HBox answers = new HBox(leftAnswers, rightAnswers);
+        answers = new HBox(leftAnswers, rightAnswers);
         answers.setSpacing(screen.getWidth()/150);
 		game.setCenter(answers);
 		BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/9.01));
