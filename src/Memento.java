@@ -9,6 +9,7 @@ public class Memento{
     int rightTeamPoints;
     int unallocatedPoints;
     boolean[] isHidden;
+    GameGUI gui;
 
     Memento(GameGUI gui){
         questionIndex = gui.currentQuestion;
@@ -23,14 +24,21 @@ public class Memento{
     }
 
     public void reinstate(){
-        /**
-         * Things to reinstate:
-         * todo - Each tile being revealed/hidden
-         * todo - The current question
-         * todo - The number of strikes
-         * todo - The multiplier
-         * todo - Each team's points
-         * todo - Unallocated points
-         */
+        gui.setupQuestion(questionIndex);
+        gui.setMultiplier(savedMultiplier);
+        gui.leftTeam = leftTeamPoints;
+        gui.leftPoints.setText(Integer.toString(leftTeamPoints));
+        gui.rightTeam = rightTeamPoints;
+        gui.rightPoints.setText(Integer.toString(rightTeamPoints));
+        gui.currentPoints = unallocatedPoints;
+        gui.currentPointsText.setText(Integer.toString(unallocatedPoints));
+        gui.numWrong = savedNumStrikes;
+        for(int i=0; i < isHidden.length; i++){
+            if(isHidden[i]){
+                //todo - make sure that it's hidden
+            }else{
+                //todo - make sure that it's revealed
+            }
+        }
     }
 }
