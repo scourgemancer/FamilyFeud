@@ -81,7 +81,7 @@ public class GameGUI extends Application{
         }
     }
 
-	private void setupQuestion(int i){
+	public void setupQuestion(int i){
         numWrong = 0;
         currentPoints = 0;
         currentPointsText.setText("0");
@@ -175,12 +175,19 @@ public class GameGUI extends Application{
             rightMultiplier.setText("");
 
         }else{
-            styleText(leftMultiplier, screen.getHeight()/7);
-            leftMultiplier.setText(Integer.toString(multiplier) + "x");
-            BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/30));
-            styleText(rightMultiplier, screen.getHeight()/7);
-            rightMultiplier.setText(Integer.toString(multiplier) + "x");
-            //todo - change margins and text size for double digits
+            if(multiplier < 10){
+                styleText(leftMultiplier, screen.getHeight()/7);
+                styleText(rightMultiplier, screen.getHeight()/7);
+                leftMultiplier.setText(Integer.toString(multiplier) + "x");
+                rightMultiplier.setText(Integer.toString(multiplier) + "x");
+                BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/30));
+            }else{
+                styleText(leftMultiplier, screen.getHeight()/10);
+                styleText(rightMultiplier, screen.getHeight()/10);
+                leftMultiplier.setText(Integer.toString(multiplier) + "x");
+                rightMultiplier.setText(Integer.toString(multiplier) + "x");
+                BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/36));
+            }
         }
     }
 
