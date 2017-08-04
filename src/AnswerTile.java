@@ -84,7 +84,7 @@ public class AnswerTile extends BorderPane{
 
     void reveal(boolean isVisible){
         if(hidden && isAnAnswer){
-            gui.caretaker.save();
+            if(isVisible) gui.caretaker.save();
             if(isVisible) gui.playAudio("reveal.mp3");
             this.getChildren().clear();
             ImageView front = new ImageView("resources\\revealed answer tile.png");
