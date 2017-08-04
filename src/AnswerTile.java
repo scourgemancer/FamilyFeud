@@ -48,11 +48,14 @@ public class AnswerTile extends BorderPane{
         hidden = true;
 
         answerText = new Text(answer.answer);
-        gui.styleText(answerText, gui.screen.getHeight()/12);
 
-        //Removes a character from the end of the text until it fits in the box
+        double size = 12.0;
+        gui.styleText(answerText, gui.screen.getHeight()/size);
+
+        //Decreases the size of the text until it fits in it's section of the box
         while(answerText.getBoundsInLocal().getWidth() > ((gui.screen.getWidth()/2.6225)*(11.0/14.0))){
-            answerText.setText(answerText.getText().substring(0, answerText.getText().length()-1));
+            size += 0.001; //increases because it's used to divide another number by
+            gui.styleText(answerText, gui.screen.getHeight()/size);
         }
 
         value = answer.points;
