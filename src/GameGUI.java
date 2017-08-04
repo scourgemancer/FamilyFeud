@@ -188,9 +188,9 @@ public class GameGUI extends Application{
             }else{
                 double size = screen.getHeight()/10;
                 leftMultiplier.setFont(Font.font("Calibri", FontWeight.BLACK, size));
-                leftMultiplier.setStyle("-fx-fill: #FF9800; -fx-stroke: black; -fx-stroke-width: " + size/30 + "px");
+                leftMultiplier.setStyle("-fx-fill: #FFE900; -fx-stroke: black; -fx-stroke-width: " + size/30 + "px");
                 rightMultiplier.setFont(Font.font("Calibri", FontWeight.BLACK, size));
-                rightMultiplier.setStyle("-fx-fill: #FF9800; -fx-stroke: black; -fx-stroke-width: " + size/30 + "px");
+                rightMultiplier.setStyle("-fx-fill: #FFE900; -fx-stroke: black; -fx-stroke-width: " + size/30 + "px");
                 leftMultiplier.setText(Integer.toString(multiplier) + "x");
                 rightMultiplier.setText(Integer.toString(multiplier) + "x");
                 BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/36));
