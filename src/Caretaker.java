@@ -3,7 +3,7 @@ import java.util.Stack;
 /**
  * Makes mementos for the game as it progresses and keeps track of their order
  */
-public class Caretaker{
+class Caretaker{
     private Stack<Memento> undos;
     private Stack<Memento> redos;
 
@@ -14,23 +14,24 @@ public class Caretaker{
     Caretaker(GameGUI gui){
         this.gui = gui;
         canRedo = false;
-        undos = new Stack<Memento>();
-        redos = new Stack<Memento>();
+        undos = new Stack<>();
+        redos = new Stack<>();
     }
 
-    public void save(){
+    void save(){
         undos.push(new Memento(gui));
         canRedo = false;
-        if(!redos.empty()) redos = new Stack<Memento>();
+        if(!redos.empty()) redos = new Stack<>();
     }
 
-    public void undo(){
+    void undo(){
+        if(undos.empty()) return;
         redos.push(new Memento(gui));
         undos.pop().reinstate();
         canRedo = true;
     }
 
-    public void redo(){
+    void redo(){
         if(canRedo && !redos.empty()){
             undos.push(new Memento(gui));
             redos.pop().reinstate();
