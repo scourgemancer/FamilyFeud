@@ -47,19 +47,19 @@ public class GameGUI extends Application{
 
 	Rectangle2D screen; //used for increased readability when referencing the screen size
 
-    public void playAudio(String filename){
+    void playAudio(String filename){
         if(audio != null) audio.stop();
         Media audioFile = new Media(Paths.get("src/resources/" + filename).toUri().toString());
         audio = new MediaPlayer(audioFile);
         audio.play();
     }
 
-	public void styleText(Text text, double size){
+	void styleText(Text text, double size){
 		text.setFont(Font.font("Calibri", FontWeight.BLACK, size));
 		text.setStyle("-fx-fill: white; -fx-stroke: black; -fx-stroke-width: " + size/30 + "px");
 	}
 
-    public void setImageAsBackground( Region region, String image, double width, double height ){
+    private void setImageAsBackground( Region region, String image, double width, double height ){
         BackgroundImage bi = new BackgroundImage(
                 new Image("resources\\" + image, width, height, false, true),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
@@ -81,7 +81,7 @@ public class GameGUI extends Application{
         }
     }
 
-	public void setupQuestion(int i){
+	void setupQuestion(int i){
         numWrong = 0;
         currentPoints = 0;
         currentPointsText.setText("0");
@@ -124,14 +124,14 @@ public class GameGUI extends Application{
         appear.setFromValue(0);
         appear.setToValue(1);
         appear.setCycleCount(1);
-        appear.setOnFinished(e ->{
+        appear.setOnFinished(e ->
             Platform.runLater(() -> {
                 try{
                     Thread.sleep(1000); //done in a separate thread to not halt user input
                 }catch(Exception exc){exc.printStackTrace();}
                 disappear.play();
-            });
-        });
+            })
+        );
 
 
         //Style the strikes and add them to the screen
@@ -147,7 +147,7 @@ public class GameGUI extends Application{
         appear.play();
     }
 
-    public void scoreAnswer(int answerValue){
+    void scoreAnswer(int answerValue){
         currentPoints += answerValue * multiplier;
         currentPointsText.setText(Integer.toString(currentPoints));
     }
@@ -166,7 +166,7 @@ public class GameGUI extends Application{
         }
     }
 
-    public void setMultiplier(int newMultiplier){
+    void setMultiplier(int newMultiplier){
         if(newMultiplier < 1) return;
         this.multiplier = newMultiplier;
         if(multiplier == 1){
@@ -176,14 +176,21 @@ public class GameGUI extends Application{
 
         }else{
             if(multiplier < 10){
-                styleText(leftMultiplier, screen.getHeight()/7);
-                styleText(rightMultiplier, screen.getHeight()/7);
+                double size = screen.getHeight()/6.5;
+                leftMultiplier.setFont(Font.font("Calibri", FontWeight.BLACK, size));
+                leftMultiplier.setStyle("-fx-fill: #FFE900; -fx-stroke: black; -fx-stroke-width: " + size/30 + "px");
+                rightMultiplier.setFont(Font.font("Calibri", FontWeight.BLACK, size));
+                rightMultiplier.setStyle("-fx-fill: #FFE900; -fx-stroke: black; -fx-stroke-width: " + size/30 + "px");
                 leftMultiplier.setText(Integer.toString(multiplier) + "x");
                 rightMultiplier.setText(Integer.toString(multiplier) + "x");
-                BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/30));
+                BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/37));
+                BorderPane.setMargin(rightMultiplier, new Insets(0, screen.getWidth()/175, 0, 0));
             }else{
-                styleText(leftMultiplier, screen.getHeight()/10);
-                styleText(rightMultiplier, screen.getHeight()/10);
+                double size = screen.getHeight()/10;
+                leftMultiplier.setFont(Font.font("Calibri", FontWeight.BLACK, size));
+                leftMultiplier.setStyle("-fx-fill: #FF9800; -fx-stroke: black; -fx-stroke-width: " + size/30 + "px");
+                rightMultiplier.setFont(Font.font("Calibri", FontWeight.BLACK, size));
+                rightMultiplier.setStyle("-fx-fill: #FF9800; -fx-stroke: black; -fx-stroke-width: " + size/30 + "px");
                 leftMultiplier.setText(Integer.toString(multiplier) + "x");
                 rightMultiplier.setText(Integer.toString(multiplier) + "x");
                 BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/36));
