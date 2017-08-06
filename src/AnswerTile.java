@@ -2,6 +2,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.shape.TriangleMesh;
 import javafx.scene.text.Text;
 
 /**
@@ -75,6 +76,30 @@ class AnswerTile extends BorderPane{
         }else{
             BorderPane.setMargin(valueText, new Insets(0, width/75, 0, 0));
         }
+
+        TriangleMesh tile3D = new TriangleMesh();   //A simple 3D rectangle
+        float fheight = (float) height;
+        float fwidth  = (float) width;
+        float fdepth  = (float) depth;
+        tile3D.getPoints().addAll(          //All points are referenced from the top, left, center
+                0f, 0f, fdepth/2,       // Top,    Left,  Front
+                -fheight, 0f, fdepth/2,          // Bottom, Left,  Front
+                0f, fwidth, fdepth/2,            // Top,    Right, Front
+                -fheight, fwidth, fdepth/2,      // Bottom, Right, Front
+                0f, 0f, -fdepth/2,               // Top,    Left,  Back
+                -fheight, 0f, -fdepth/2,         // Bottom, Left,  Back
+                0f, fwidth, -fdepth/2,           // Top,    Right, Back
+                -fheight, fwidth, -fdepth/2      // Bottom, Right, Back
+        );
+        tile3D.getTexCoords().addAll(0,0); //todo - replace with real values
+        tile3D.getFaces().addAll(
+                0,0, 2,0, 4,0, 6,0,     //Top
+                0,0, 1,0, 2,0, 3,0,              //Front
+                2,0, 3,0, 6,0, 7,0,              //Right
+                4,0, 5,0, 6,0, 7,0,              //Back
+                0,0, 1,0, 4,0, 5,0,              //Left
+                1,0, 3,0, 5,0, 7,0               //Bottom
+        );
 
         this.getChildren().clear();
         ImageView front = new ImageView("resources\\numbered answer tile.png");
