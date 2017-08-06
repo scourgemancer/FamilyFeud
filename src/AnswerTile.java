@@ -7,7 +7,7 @@ import javafx.scene.text.Text;
 /**
  * Represents one of the tiles containing an answer and it's value for the GUI's
  */
-public class AnswerTile extends BorderPane{
+class AnswerTile extends BorderPane{
     private Answer answer;
     int rank;
     int value;
@@ -24,6 +24,7 @@ public class AnswerTile extends BorderPane{
 
     private double width;
     private double height;
+    private double depth;
 
     AnswerTile(GameGUI gui, int i){
         super();
@@ -36,6 +37,7 @@ public class AnswerTile extends BorderPane{
 
         width = gui.screen.getWidth()/2.6225;
         height = gui.screen.getHeight()/8.5714;
+        depth = height / 2;
         setPrefSize(width, height);
 
         clear();
