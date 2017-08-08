@@ -89,59 +89,46 @@ class AnswerTile extends BorderPane{
         float fdepth  = (float) depth;
         cuboid.getPoints().addAll(      //All points are referenced from the top, left, center
                 0f, 0f, 0f,            // Top,    Left,  Front
-                0f, -fheight, 0f,              // Bottom, Left,  Front
+                0f, fheight, 0f,              // Bottom, Left,  Front
                 fwidth, 0f, 0f,                // Top,    Right, Front
-                fwidth, -fheight, 0f,          // Bottom, Right, Front
+                fwidth, fheight, 0f,          // Bottom, Right, Front
                 0f, 0f, -fdepth,               // Top,    Left,  Back
-                0f, -fheight, -fdepth,         // Bottom, Left,  Back
+                0f, fheight, -fdepth,         // Bottom, Left,  Back
                 fwidth, 0f, -fdepth,           // Top,    Right, Back
-                fwidth, -fheight, -fdepth      // Bottom, Right, Back
+                fwidth, fheight, -fdepth      // Bottom, Right, Back
         );
         cuboid.getTexCoords().addAll(       //0.0 to 1.0 percent from top left corner to the bottom right
-                //Front:  (0-3)
-                0, 0,   //Top left           This is the order that each image is in
-                1, 0,           //Top right
-                0, 0.25f,       //Bottom left
-                1, 0.25f,       //Bottom right
-                //Bottom: (4-7)
+                0, 0,
+                1, 0,
                 0, 0.25f,
                 1, 0.25f,
                 0, 0.375f,
                 1, 0.375f,
-                //Top:    (8-11)
-                0, 0.375f,
-                1, 0.375f,
-                0, 0.5f,
-                1, 0.5f,
-                //Back:   (12-15)
                 0, 0.5f,
                 1, 0.5f,
                 0, 0.75f,
                 1, 0.75f,
-                //Side:   (16, 19)
-                0, 0.75f,
                 0.126f, 0.75f,
                 0, 1,
                 0.126f, 1
         );
         cuboid.getFaces().addAll(       //The faces are listed as they move down, back, and counterclockwise
-                0,8, 2,9, 4,10,     // Top Front
-                2,9, 4,10, 6,11,            // Top Back
-                0,0, 1,1, 2,2,              // Front Top
-                1,1, 2,2, 3,3,              // Front Bottom
-                2,16, 3,17, 6,18,           // Right Top
-                3,17, 6,18, 7,19,           // Right Bottom
-                4,0, 6,0, 7,0,              // Back Top
-                4,0, 5,0, 7,0,              // Back Bottom
-                0,16, 1,17, 4,18,           // Left Top
-                1,17, 4,18, 5,19,           // Left Bottom
-                1,4, 3,5, 5,6,              // Bottom Front
-                3,5, 5,6, 7,7               // Bottom Back
+                0,6, 2,7, 4,4,     // Top Front
+                2,7, 4,4, 6,5,              // Top Back
+                0,0, 1,2, 2,1,              // Front Top
+                1,2, 2,1, 3,3,              // Front Bottom
+                2,8, 3,11, 6,10,            // Right Top
+                3,11, 6,10, 7,12,           // Right Bottom
+                4,6, 6,7, 7,9,              // Back Top
+                4,6, 5,8, 7,9,              // Back Bottom
+                0,8, 4,10, 5,12,            // Left Top
+                0,8, 1,11, 5,12,            // Left Bottom
+                1,4, 3,5, 5,2,              // Bottom Front
+                3,5, 5,2, 7,3               // Bottom Back
         );
         PhongMaterial material = new PhongMaterial();
         material.setDiffuseMap(new Image("resources\\texture.png"));
         MeshView tile3D = new MeshView(cuboid);
-        tile3D.setDrawMode(DrawMode.FILL);
         tile3D.setMaterial(material);
 
 
