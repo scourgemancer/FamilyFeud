@@ -87,7 +87,7 @@ class AnswerTile extends BorderPane{
         float fheight = (float) height;
         float fwidth  = (float) width;
         float fdepth  = (float) depth;
-        cuboid.getPoints().addAll(          //All points are referenced from the top, left, center
+        cuboid.getPoints().addAll(      //All points are referenced from the top, left, center
                 0f, 0f, fdepth/2,       // Top,    Left,  Front
                 -fheight, 0f, fdepth/2,          // Bottom, Left,  Front
                 0f, fwidth, fdepth/2,            // Top,    Right, Front
@@ -97,8 +97,34 @@ class AnswerTile extends BorderPane{
                 0f, fwidth, -fdepth/2,           // Top,    Right, Back
                 -fheight, fwidth, -fdepth/2      // Bottom, Right, Back
         );
-        cuboid.getTexCoords().addAll(0,0); //todo - replace with percentages to 1.0 from top left corner
-        cuboid.getFaces().addAll(//The faces are listed as they move down, back, and counterclockwise
+        cuboid.getTexCoords().addAll(       //0.0 to 1.0 percent from top left corner to the bottom right
+                //Front:  (0-3)
+                0, 0,   //Top left           This is the order that each image is in
+                1, 0,           //Top right
+                0, 0.25f,       //Bottom left
+                1, 0.25f,       //Bottom right
+                //Bottom: (4-7)
+                0, 0.25f,
+                1, 0.25f,
+                0, 0.375f,
+                1, 0.375f,
+                //Top:    (8-11)
+                0, 0.375f,
+                1, 0.375f,
+                0, 0.5f,
+                1, 0.5f,
+                //Back:   (12-15)
+                0, 0.5f,
+                1, 0.5f,
+                0, 0.75f,
+                1, 0.75f,
+                //Side:   (16, 19)
+                0, 0.75f,
+                0.126f, 0.75f,
+                0, 1,
+                0.126f, 1
+        );
+        cuboid.getFaces().addAll(       //The faces are listed as they move down, back, and counterclockwise
                 0,0, 2,0, 4,0,     // Top Front
                 2,0, 4,0, 6,0,              // Top Back
                 0,0, 1,0, 2,0,              // Front Top
@@ -113,7 +139,7 @@ class AnswerTile extends BorderPane{
                 3,0, 5,0, 7,0               // Bottom Back
         );
         PhongMaterial material = new PhongMaterial();
-        material.setDiffuseMap(new Image("resources\\AnswerTile Texture.png"));
+        material.setDiffuseMap(new Image("resources\\texture.png"));
         MeshView tile3D = new MeshView(cuboid);
         tile3D.setDrawMode(DrawMode.FILL);
         tile3D.setMaterial(material);
