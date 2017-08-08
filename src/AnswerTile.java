@@ -1,7 +1,11 @@
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.DrawMode;
+import javafx.scene.shape.MeshView;
 import javafx.scene.shape.TriangleMesh;
 import javafx.scene.text.Text;
 
@@ -55,7 +59,7 @@ class AnswerTile extends BorderPane{
         double size = 12.0;
         gui.styleText(answerText, gui.screen.getHeight()/size);
 
-        //Decreases the size of the text until it fits in it's section of the box
+        // Decreases the size of the text until it fits in it's section of the box
         while(answerText.getBoundsInLocal().getWidth() > ((gui.screen.getWidth()/2.6225)*(11.0/14.0))){
             size += 0.001; //increases because it's used to divide another number by
             gui.styleText(answerText, gui.screen.getHeight()/size);
@@ -77,11 +81,13 @@ class AnswerTile extends BorderPane{
             BorderPane.setMargin(valueText, new Insets(0, width/75, 0, 0));
         }
 
-        TriangleMesh tile3D = new TriangleMesh();   //A simple 3D rectangle
+
+        // Create the 3D cuboid for the tile
+        TriangleMesh cuboid = new TriangleMesh();   //A simple 3D rectangle
         float fheight = (float) height;
         float fwidth  = (float) width;
         float fdepth  = (float) depth;
-        tile3D.getPoints().addAll(          //All points are referenced from the top, left, center
+        cuboid.getPoints().addAll(          //All points are referenced from the top, left, center
                 0f, 0f, fdepth/2,       // Top,    Left,  Front
                 -fheight, 0f, fdepth/2,          // Bottom, Left,  Front
                 0f, fwidth, fdepth/2,            // Top,    Right, Front
@@ -91,15 +97,21 @@ class AnswerTile extends BorderPane{
                 0f, fwidth, -fdepth/2,           // Top,    Right, Back
                 -fheight, fwidth, -fdepth/2      // Bottom, Right, Back
         );
-        tile3D.getTexCoords().addAll(0,0); //todo - replace with real values
-        tile3D.getFaces().addAll(
-                0,0, 2,0, 4,0, 6,0,     //Top
-                0,0, 1,0, 2,0, 3,0,              //Front
-                2,0, 3,0, 6,0, 7,0,              //Right
-                4,0, 5,0, 6,0, 7,0,              //Back
-                0,0, 1,0, 4,0, 5,0,              //Left
-                1,0, 3,0, 5,0, 7,0               //Bottom
+        cuboid.getTexCoords().addAll(0,0); //todo - replace with percentages to 1.0 from top left corner
+        cuboid.getFaces().addAll(//todo - Actually needs twice as many faces because they must be triangles
+                0,0, 2,0, 4,0, 6,0,     // Top
+                0,0, 1,0, 2,0, 3,0,              // Front
+                2,0, 3,0, 6,0, 7,0,              // Right
+                4,0, 5,0, 6,0, 7,0,              // Back
+                0,0, 1,0, 4,0, 5,0,              // Left
+                1,0, 3,0, 5,0, 7,0               // Bottom
         );
+        PhongMaterial material = new PhongMaterial();
+        material.setDiffuseMap(new Image("resources\\AnswerTile Texture.png"));
+        MeshView tile3D = new MeshView(cuboid);
+        tile3D.setDrawMode(DrawMode.FILL);
+        tile3D.setMaterial(material);
+
 
         this.getChildren().clear();
         ImageView front = new ImageView("resources\\numbered answer tile.png");
