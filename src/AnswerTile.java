@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.DrawMode;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.TriangleMesh;
 import javafx.scene.text.Text;
@@ -114,17 +113,17 @@ class AnswerTile extends BorderPane{
         );
         cuboid.getFaces().addAll(       //The faces are listed as they move down, back, and counterclockwise
                 0,6, 2,7, 4,4,     // Top Front
-                2,7, 4,4, 6,5,              // Top Back
+                2,7, 6,5, 4,4,              // Top Back
                 0,0, 1,2, 2,1,              // Front Top
-                1,2, 2,1, 3,3,              // Front Bottom
+                1,2, 3,3, 2,1,              // Front Bottom
                 2,8, 3,11, 6,10,            // Right Top
-                3,11, 6,10, 7,12,           // Right Bottom
-                4,6, 6,7, 7,9,              // Back Top
+                3,11, 7,12, 6,10,           // Right Bottom
+                4,6, 7,9, 6,7,              // Back Top
                 4,6, 5,8, 7,9,              // Back Bottom
-                0,8, 4,10, 5,12,            // Left Top
+                0,8, 5,12, 4,10,            // Left Top
                 0,8, 1,11, 5,12,            // Left Bottom
                 1,4, 3,5, 5,2,              // Bottom Front
-                3,5, 5,2, 7,3               // Bottom Back
+                5,2, 3,5, 7,3               // Bottom Back
         );
         PhongMaterial material = new PhongMaterial();
         material.setDiffuseMap(new Image("resources\\texture.png"));
