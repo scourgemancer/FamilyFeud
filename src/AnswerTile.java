@@ -61,7 +61,7 @@ class AnswerTile extends BorderPane{
 
         // Decreases the size of the text until it fits in it's section of the box
         while(answerText.getBoundsInLocal().getWidth() > ((gui.screen.getWidth()/2.6225)*(11.0/14.0))){
-            size += 0.001; //increases because it's used to divide another number by
+            size += 0.001; //increases because it's used to divide another number
             gui.styleText(answerText, gui.screen.getHeight()/size);
         }
 
@@ -98,19 +98,27 @@ class AnswerTile extends BorderPane{
                 -fheight, fwidth, -fdepth/2      // Bottom, Right, Back
         );
         cuboid.getTexCoords().addAll(0,0); //todo - replace with percentages to 1.0 from top left corner
-        cuboid.getFaces().addAll(//todo - Actually needs twice as many faces because they must be triangles
-                0,0, 2,0, 4,0, 6,0,     // Top
-                0,0, 1,0, 2,0, 3,0,              // Front
-                2,0, 3,0, 6,0, 7,0,              // Right
-                4,0, 5,0, 6,0, 7,0,              // Back
-                0,0, 1,0, 4,0, 5,0,              // Left
-                1,0, 3,0, 5,0, 7,0               // Bottom
+        cuboid.getFaces().addAll(//The faces are listed as they move down, back, and counterclockwise
+                0,0, 2,0, 4,0,     // Top Front
+                2,0, 4,0, 6,0,              // Top Back
+                0,0, 1,0, 2,0,              // Front Top
+                1,0, 2,0, 3,0,              // Front Bottom
+                2,0, 3,0, 6,0,              // Right Top
+                3,0, 6,0, 7,0,              // Right Bottom
+                4,0, 6,0, 7,0,              // Back Top
+                4,0, 5,0, 7,0,              // Back Bottom
+                0,0, 1,0, 4,0,              // Left Top
+                1,0, 4,0, 5,0,              // Left Bottom
+                1,0, 3,0, 5,0,              // Bottom Front
+                3,0, 5,0, 7,0               // Bottom Back
         );
         PhongMaterial material = new PhongMaterial();
         material.setDiffuseMap(new Image("resources\\AnswerTile Texture.png"));
         MeshView tile3D = new MeshView(cuboid);
         tile3D.setDrawMode(DrawMode.FILL);
         tile3D.setMaterial(material);
+        this.getChildren().clear();
+        this.setCenter(tile3D);
 
 
         this.getChildren().clear();
