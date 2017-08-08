@@ -88,14 +88,14 @@ class AnswerTile extends BorderPane{
         float fwidth  = (float) width;
         float fdepth  = (float) depth;
         cuboid.getPoints().addAll(      //All points are referenced from the top, left, center
-                0f, 0f, fdepth/2,       // Top,    Left,  Front
-                -fheight, 0f, fdepth/2,          // Bottom, Left,  Front
-                0f, fwidth, fdepth/2,            // Top,    Right, Front
-                -fheight, fwidth, fdepth/2,      // Bottom, Right, Front
-                0f, 0f, -fdepth/2,               // Top,    Left,  Back
-                -fheight, 0f, -fdepth/2,         // Bottom, Left,  Back
-                0f, fwidth, -fdepth/2,           // Top,    Right, Back
-                -fheight, fwidth, -fdepth/2      // Bottom, Right, Back
+                0f, 0f, 0f,            // Top,    Left,  Front
+                0f, -fheight, 0f,              // Bottom, Left,  Front
+                fwidth, 0f, 0f,                // Top,    Right, Front
+                fwidth, -fheight, 0f,          // Bottom, Right, Front
+                0f, 0f, -fdepth,               // Top,    Left,  Back
+                0f, -fheight, -fdepth,         // Bottom, Left,  Back
+                fwidth, 0f, -fdepth,           // Top,    Right, Back
+                fwidth, -fheight, -fdepth      // Bottom, Right, Back
         );
         cuboid.getTexCoords().addAll(       //0.0 to 1.0 percent from top left corner to the bottom right
                 //Front:  (0-3)
@@ -143,15 +143,10 @@ class AnswerTile extends BorderPane{
         MeshView tile3D = new MeshView(cuboid);
         tile3D.setDrawMode(DrawMode.FILL);
         tile3D.setMaterial(material);
-        this.getChildren().clear();
-        this.setCenter(tile3D);
 
 
         this.getChildren().clear();
-        ImageView front = new ImageView("resources\\numbered answer tile.png");
-        front.setFitHeight(height);
-        front.setFitWidth(width);
-        this.getChildren().add(front);
+        this.getChildren().add(tile3D);
         this.setCenter(rankText);
     }
 
