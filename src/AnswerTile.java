@@ -125,18 +125,18 @@ class AnswerTile extends BorderPane{
                 0.126f, 1
         );
         cuboid.getFaces().addAll(       //The faces are listed as they move down, back, and counterclockwise
-                0,0, 2,0, 4,0,     // Top Front
-                2,0, 4,0, 6,0,              // Top Back
-                0,0, 1,0, 2,0,              // Front Top
-                1,0, 2,0, 3,0,              // Front Bottom
-                2,0, 3,0, 6,0,              // Right Top
-                3,0, 6,0, 7,0,              // Right Bottom
+                0,8, 2,9, 4,10,     // Top Front
+                2,9, 4,10, 6,11,            // Top Back
+                0,0, 1,1, 2,2,              // Front Top
+                1,1, 2,2, 3,3,              // Front Bottom
+                2,16, 3,17, 6,18,           // Right Top
+                3,17, 6,18, 7,19,           // Right Bottom
                 4,0, 6,0, 7,0,              // Back Top
                 4,0, 5,0, 7,0,              // Back Bottom
-                0,0, 1,0, 4,0,              // Left Top
-                1,0, 4,0, 5,0,              // Left Bottom
-                1,0, 3,0, 5,0,              // Bottom Front
-                3,0, 5,0, 7,0               // Bottom Back
+                0,16, 1,17, 4,18,           // Left Top
+                1,17, 4,18, 5,19,           // Left Bottom
+                1,4, 3,5, 5,6,              // Bottom Front
+                3,5, 5,6, 7,7               // Bottom Back
         );
         PhongMaterial material = new PhongMaterial();
         material.setDiffuseMap(new Image("resources\\texture.png"));
