@@ -134,7 +134,7 @@ class AnswerTile extends StackPane{
         PhongMaterial material = new PhongMaterial();
         material.setDiffuseMap(new Image("resources\\texture.png"));
         MeshView tile3D = new MeshView(cuboid);
-        tile3D.setMaterial(material); //todo - Try putting the tile in something and flipping that
+        tile3D.setMaterial(material);
         tile3D.setCullFace(CullFace.NONE); //todo - Fix the back side
 
 
@@ -176,11 +176,10 @@ class AnswerTile extends StackPane{
     }
 
     void hide(){ //todo - update once done
-        this.getChildren().clear();
-        ImageView front = new ImageView("resources\\numbered answer tile.png");
-        front.setFitHeight(height);
-        front.setFitWidth(width);
-        this.getChildren().addAll(front, rankText);
+        this.getChildren().remove(tile);
+        this.getChildren().add(rankText);
+        rankText.setRotationAxis(Rotate.X_AXIS);
+        rankText.setRotate(180);
         hidden = true;
     }
 
