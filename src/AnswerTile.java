@@ -83,6 +83,8 @@ class AnswerTile extends StackPane{
         }else{
             BorderPane.setMargin(valueText, new Insets(0, width/75, 0, 0));
         }
+        tile.setRotationAxis(Rotate.X_AXIS);
+        tile.setRotate(180); //Prepare it to be flipped when revealed
 
 
         // Create the 3D cuboid for the tile
@@ -118,8 +120,8 @@ class AnswerTile extends StackPane{
         cuboid.getFaces().addAll(       //The faces are listed as they move down, back, and counterclockwise
                 0,6, 2,7, 4,4,     // Top Front
                 2,7, 6,5, 4,4,              // Top Back
-                0,0, 1,2, 2,1,              // Front Top
-                1,2, 3,3, 2,1,              // Front Bottom
+                0,0, 2,1, 1,2,              // Front Top
+                1,2, 2,1, 3,3,              // Front Bottom
                 2,8, 3,11, 6,10,            // Right Top
                 3,11, 7,12, 6,10,           // Right Bottom
                 4,6, 7,9, 6,7,              // Back Top
@@ -151,10 +153,24 @@ class AnswerTile extends StackPane{
                 gui.caretaker.save();
                 gui.playAudio("reveal.mp3");
                 flip.play();
+                synchronized(this){
+                    try{
+                        this.wait(250);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                this.getChildren().remove(rankText);
+                this.getChildren().add(tile);
+            }else{
+                Duration dur = flip.getDuration();
+                flip.setDuration(Duration.ZERO);
+                this.getChildren().remove(rankText);
+                this.getChildren().add(tile);
+                flip.play();
+                flip.setDuration(dur);
             }
             hidden = false;
-            this.getChildren().remove(rankText);
-            this.getChildren().add(tile);
             gui.scoreAnswer(value);
         }
     }
