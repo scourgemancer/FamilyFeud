@@ -175,7 +175,7 @@ class AnswerTile extends StackPane{
         }
     }
 
-    void hide(){ //todo - update once done
+    void hide(){
         this.getChildren().remove(tile);
         this.getChildren().add(rankText);
         rankText.setRotationAxis(Rotate.X_AXIS);
@@ -183,7 +183,7 @@ class AnswerTile extends StackPane{
         hidden = true;
     }
 
-    void clear(){ //todo - update once done
+    void clear(){
         hidden = true;
         isAnAnswer = false;
         this.getChildren().clear();
