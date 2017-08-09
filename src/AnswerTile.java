@@ -12,10 +12,8 @@ import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
-/**
- * Represents one of the tiles containing an answer and it's value for the GUI's
- */
-class AnswerTile extends BorderPane{
+/** Represents one of the tiles containing an answer and it's value for the GUI's */
+class AnswerTile extends StackPane{
     private Answer answer;
     int rank;
     int value;
@@ -144,8 +142,7 @@ class AnswerTile extends BorderPane{
 
 
         this.getChildren().clear();
-        this.getChildren().add(tile3D);
-        this.setCenter(rankText);
+        this.getChildren().addAll(tile3D, rankText);
     }
 
     void reveal(boolean isVisible){
@@ -156,7 +153,8 @@ class AnswerTile extends BorderPane{
                 flip.play();
             }
             hidden = false;
-            this.setCenter(tile);
+            this.getChildren().remove(rankText);
+            this.getChildren().add(tile);
             gui.scoreAnswer(value);
         }
     }
@@ -166,8 +164,7 @@ class AnswerTile extends BorderPane{
         ImageView front = new ImageView("resources\\numbered answer tile.png");
         front.setFitHeight(height);
         front.setFitWidth(width);
-        this.getChildren().add(front);
-        this.setCenter(rankText);
+        this.getChildren().addAll(front, rankText);
         hidden = true;
     }
 
