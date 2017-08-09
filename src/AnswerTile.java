@@ -30,7 +30,7 @@ class AnswerTile extends BorderPane{
     private RotateTransition flip;
 
     boolean hidden;
-    boolean isAnAnswer;
+    private boolean isAnAnswer;
 
     private double width;
     private double height;
@@ -134,8 +134,8 @@ class AnswerTile extends BorderPane{
         PhongMaterial material = new PhongMaterial();
         material.setDiffuseMap(new Image("resources\\texture.png"));
         MeshView tile3D = new MeshView(cuboid);
-        tile3D.setMaterial(material);
-        tile3D.setCullFace(CullFace.NONE);
+        tile3D.setMaterial(material); //todo - Try putting the tile in something and flipping that
+        tile3D.setCullFace(CullFace.NONE); //todo - Fix the back side
 
 
         flip = new RotateTransition(Duration.millis(500), this);
@@ -161,7 +161,7 @@ class AnswerTile extends BorderPane{
         }
     }
 
-    void hide(){
+    void hide(){ //todo - update once done
         this.getChildren().clear();
         ImageView front = new ImageView("resources\\numbered answer tile.png");
         front.setFitHeight(height);
@@ -171,7 +171,7 @@ class AnswerTile extends BorderPane{
         hidden = true;
     }
 
-    void clear(){
+    void clear(){ //todo - update once done
         hidden = true;
         isAnAnswer = false;
         this.getChildren().clear();
