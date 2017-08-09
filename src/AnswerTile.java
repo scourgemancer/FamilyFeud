@@ -1,12 +1,16 @@
+import javafx.animation.RotateTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.CullFace;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.TriangleMesh;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
 
 /**
  * Represents one of the tiles containing an answer and it's value for the GUI's
@@ -22,6 +26,8 @@ class AnswerTile extends BorderPane{
     Text valueText;
     Text rankText;
     private BorderPane tile;
+    private TriangleMesh cuboid;
+    private RotateTransition flip;
 
     boolean hidden;
     boolean isAnAnswer;
@@ -82,7 +88,7 @@ class AnswerTile extends BorderPane{
 
 
         // Create the 3D cuboid for the tile
-        TriangleMesh cuboid = new TriangleMesh();   //A simple 3D rectangle
+        cuboid = new TriangleMesh();   //A simple 3D rectangle
         float fheight = (float) height;
         float fwidth  = (float) width;
         float fdepth  = (float) depth;
@@ -129,6 +135,12 @@ class AnswerTile extends BorderPane{
         material.setDiffuseMap(new Image("resources\\texture.png"));
         MeshView tile3D = new MeshView(cuboid);
         tile3D.setMaterial(material);
+        tile3D.setCullFace(CullFace.NONE);
+
+
+        flip = new RotateTransition(Duration.millis(500), this);
+        flip.setAxis(Rotate.X_AXIS);
+        flip.setByAngle(180);
 
 
         this.getChildren().clear();
@@ -138,19 +150,14 @@ class AnswerTile extends BorderPane{
 
     void reveal(boolean isVisible){
         if(hidden && isAnAnswer){
-            if(isVisible) gui.caretaker.save();
-            if(isVisible) gui.playAudio("reveal.mp3");
-            this.getChildren().clear();
-            ImageView front = new ImageView("resources\\revealed answer tile.png");
-            front.setFitHeight(height);
-            front.setFitWidth(width);
-            this.getChildren().add(front);
-            this.setCenter(tile);
-            hidden = false;
-            gui.scoreAnswer(value);
             if(isVisible){
-                //todo - animate the question revealing itself (flip while rotating in place && play sound)
+                gui.caretaker.save();
+                gui.playAudio("reveal.mp3");
+                flip.play();
             }
+            hidden = false;
+            this.setCenter(tile);
+            gui.scoreAnswer(value);
         }
     }
 
