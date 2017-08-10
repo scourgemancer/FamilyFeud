@@ -296,21 +296,21 @@ public class GameGUI extends Application{
 				case "8": answerTiles.get(7).reveal(true); break;
 				case "9": answerTiles.get(8).reveal(true); break;
 				case "0": answerTiles.get(9).reveal(true); break;
-/** restart */  case "R": caretaker.save(); restart(); break;
-/** back */     case "B": caretaker.save(); setupQuestion(--currentQuestion); break;
-/** next */     case "N": caretaker.save(); setupQuestion(++currentQuestion); break;
-/** theme */    case "T": playAudio("theme.mp3"); break;
-/** strike */	case "X": caretaker.save(); wrongAnswer(numWrong); break;
-/** --x's */    case "Z": caretaker.save(); if(numWrong > 0) --numWrong; break;
-/** ++x's */    case "C": caretaker.save(); if(numWrong < 3) ++numWrong; break;
-/** stop */		case "S": if(audio != null) audio.stop(); break;
+/* restart */   case "R": caretaker.save(); restart(); break;
+/* back */      case "B": caretaker.save(); setupQuestion(--currentQuestion); break;
+/* next */      case "N": caretaker.save(); setupQuestion(++currentQuestion); break;
+/* theme */     case "T": playAudio("theme.mp3"); break;
+/* strike */	case "X": caretaker.save(); wrongAnswer(numWrong); break;
+/* --x's */     case "Z": caretaker.save(); if(numWrong > 0) --numWrong; break;
+/* ++x's */     case "C": caretaker.save(); if(numWrong < 3) ++numWrong; break;
+/* stop */		case "S": if(audio != null) audio.stop(); break;
 				case "Left": selectTeam(-1); break;
 				case "Right": selectTeam(1); break;
 				case "Up": caretaker.save(); setMultiplier(multiplier+1); break;
 				case "Down": caretaker.save(); setMultiplier(multiplier-1); break;
-/** score */    case "Space": caretaker.save(); scoreQuestion(); break;
-/** undo */     case "Backspace": caretaker.undo(); break;
-/** redo */ 	case "Enter": caretaker.redo(); break;
+/* score */     case "Space": caretaker.save(); scoreQuestion(); break;
+/* undo */      case "Backspace": caretaker.undo(); break;
+/* redo */ 	    case "Enter": caretaker.redo(); break;
 			}
 		});
 
