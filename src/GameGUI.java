@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.AmbientLight;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -277,6 +278,12 @@ public class GameGUI extends Application{
         answers.setSpacing(screen.getWidth()/150);
 		game.setCenter(answers);
 		BorderPane.setMargin(answers, new Insets(screen.getHeight()/21, 0, 0, screen.getWidth()/9.01));
+
+        AmbientLight light = new AmbientLight();
+        light.setLightOn(true);
+        light.setTranslateZ(0);
+        light.getScope().add(answers);
+        answers.getChildren().add(light);
 
 		setupQuestion(0);
 
