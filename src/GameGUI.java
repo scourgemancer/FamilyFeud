@@ -300,7 +300,9 @@ public class GameGUI extends Application{
 /** back */     case "B": caretaker.save(); setupQuestion(--currentQuestion); break;
 /** next */     case "N": caretaker.save(); setupQuestion(++currentQuestion); break;
 /** theme */    case "T": playAudio("theme.mp3"); break;
-/** strike */	case "X": caretaker.save(); wrongAnswer(++numWrong); break;
+/** strike */	case "X": caretaker.save(); wrongAnswer(numWrong); break;
+/** --x's */    case "Z": caretaker.save(); if(numWrong > 0) --numWrong; break;
+/** ++x's */    case "C": caretaker.save(); if(numWrong < 3) ++numWrong; break;
 /** stop */		case "S": if(audio != null) audio.stop(); break;
 				case "Left": selectTeam(-1); break;
 				case "Right": selectTeam(1); break;
