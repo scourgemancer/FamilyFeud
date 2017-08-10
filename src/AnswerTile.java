@@ -130,8 +130,8 @@ class AnswerTile extends StackPane{
                 1,2, 3,3, 2,1,              // Front Bottom
                 2,8, 6,10, 3,11,            // Right Top
                 3,11, 6,10, 7,12,           // Right Bottom
-                4,6, 7,9, 6,7,              // Back Top
-                4,6, 5,8, 7,9,              // Back Bottom
+                4,6, 6,7, 7,9,              // Back Top
+                4,6, 7,9, 5,8,              // Back Bottom
                 0,8, 4,10, 5,12,            // Left Top
                 0,8, 5,12, 1,11,            // Left Bottom
                 1,4, 5,2, 3,5,              // Bottom Front
@@ -141,7 +141,6 @@ class AnswerTile extends StackPane{
         material.setDiffuseMap(new Image("resources\\texture.png"));
         MeshView tile3D = new MeshView(cuboid);
         tile3D.setMaterial(material);
-        //tile3D.setCullFace(CullFace.NONE); //todo - Fix the back side
 
 
         this.getChildren().clear();
