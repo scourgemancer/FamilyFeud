@@ -25,7 +25,6 @@ class AnswerTile extends StackPane{
     Text rankText;
     private BorderPane tile;
     private TriangleMesh cuboid;
-    private RotateTransition flip;
 
     boolean hidden;
     private boolean isAnAnswer;
@@ -49,6 +48,13 @@ class AnswerTile extends StackPane{
         setPrefSize(width, height);
 
         clear();
+    }
+
+    private void rotate(double angle, Duration time){
+        RotateTransition flip = new RotateTransition(time, this);
+        flip.setAxis(Rotate.X_AXIS);
+        flip.setByAngle(angle);
+        flip.play();
     }
 
     void setAnswer(Answer a){
@@ -93,14 +99,14 @@ class AnswerTile extends StackPane{
         float fwidth  = (float) width;
         float fdepth  = (float) depth;
         cuboid.getPoints().addAll(      //All points are referenced from the top, left, center
-                0f, 0f, 0f,            // Top,    Left,  Front
-                0f, fheight, 0f,              // Bottom, Left,  Front
-                fwidth, 0f, 0f,                // Top,    Right, Front
-                fwidth, fheight, 0f,          // Bottom, Right, Front
-                0f, 0f, -fdepth,               // Top,    Left,  Back
-                0f, fheight, -fdepth,         // Bottom, Left,  Back
-                fwidth, 0f, -fdepth,           // Top,    Right, Back
-                fwidth, fheight, -fdepth      // Bottom, Right, Back
+                0f, 0f, 0f,           // Top,    Left,  Front   0
+                0f, fheight, 0f,              // Bottom, Left,  Front    1
+                fwidth, 0f, 0f,               // Top,    Right, Front    2
+                fwidth, fheight, 0f,          // Bottom, Right, Front    3
+                0f, 0f, -fdepth,              // Top,    Left,  Back     4
+                0f, fheight, -fdepth,         // Bottom, Left,  Back     5
+                fwidth, 0f, -fdepth,          // Top,    Right, Back     6
+                fwidth, fheight, -fdepth      // Bottom, Right, Back     7
         );
         cuboid.getTexCoords().addAll(       //0.0 to 1.0 percent from top left corner to the bottom right
                 0, 0,
@@ -120,8 +126,8 @@ class AnswerTile extends StackPane{
         cuboid.getFaces().addAll(       //The faces are listed as they move down, back, and counterclockwise
                 0,6, 2,7, 4,4,     // Top Front
                 2,7, 6,5, 4,4,              // Top Back
-                0,0, 2,1, 1,2,              // Front Top
-                1,2, 2,1, 3,3,              // Front Bottom
+                0,0, 1,2, 2,1,              // Front Top
+                1,2, 3,3, 2,1,              // Front Bottom
                 2,8, 3,11, 6,10,            // Right Top
                 3,11, 7,12, 6,10,           // Right Bottom
                 4,6, 7,9, 6,7,              // Back Top
@@ -138,11 +144,6 @@ class AnswerTile extends StackPane{
         tile3D.setCullFace(CullFace.NONE); //todo - Fix the back side
 
 
-        flip = new RotateTransition(Duration.millis(500), this);
-        flip.setAxis(Rotate.X_AXIS);
-        flip.setByAngle(180);
-
-
         this.getChildren().clear();
         this.getChildren().addAll(tile3D, rankText);
     }
@@ -152,7 +153,7 @@ class AnswerTile extends StackPane{
             if(isVisible){
                 gui.caretaker.save();
                 gui.playAudio("reveal.mp3");
-                flip.play();
+                rotate(180, Duration.millis(500));
                 synchronized(this){
                     try{
                         this.wait(250);
@@ -160,16 +161,11 @@ class AnswerTile extends StackPane{
                         e.printStackTrace();
                     }
                 }
-                this.getChildren().remove(rankText);
-                this.getChildren().add(tile);
             }else{
-                Duration dur = flip.getDuration();
-                flip.setDuration(Duration.ZERO);
-                this.getChildren().remove(rankText);
-                this.getChildren().add(tile);
-                flip.play();
-                flip.setDuration(dur);
+                rotate(180, Duration.millis(1));
             }
+            this.getChildren().remove(rankText);
+            this.getChildren().add(tile);
             hidden = false;
             gui.scoreAnswer(value);
         }
@@ -178,8 +174,7 @@ class AnswerTile extends StackPane{
     void hide(){
         this.getChildren().remove(tile);
         this.getChildren().add(rankText);
-        rankText.setRotationAxis(Rotate.X_AXIS);
-        rankText.setRotate(180);
+        rotate(180, Duration.millis(1));
         hidden = true;
     }
 
@@ -187,6 +182,7 @@ class AnswerTile extends StackPane{
         hidden = true;
         isAnAnswer = false;
         this.getChildren().clear();
+        rotate(-this.getRotate(), Duration.millis(1));
         ImageView front = new ImageView("resources\\blank answer tile.png");
         front.setFitHeight(height);
         front.setFitWidth(width);
