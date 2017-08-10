@@ -22,9 +22,7 @@ import javafx.util.Duration;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-/**
- * The graphical view for the game and starting point of the program
- */
+/** The graphical view for the game and starting point of the program */
 public class GameGUI extends Application{
 	private Polls polls; //holds all of the questions, which each hold their own answers
     int currentQuestion = 0;

@@ -141,7 +141,7 @@ class AnswerTile extends StackPane{
         material.setDiffuseMap(new Image("resources\\texture.png"));
         MeshView tile3D = new MeshView(cuboid);
         tile3D.setMaterial(material);
-        tile3D.setCullFace(CullFace.NONE); //todo - Fix the back side
+        //tile3D.setCullFace(CullFace.NONE); //todo - Fix the back side
 
 
         this.getChildren().clear();
