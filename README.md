@@ -2,6 +2,8 @@
 A Family Feud designed program using JavaFX meant to resemble the classic American game show
 
 ## Controls
+|Key    |Action                                                       |
+|-------|:-----------------------------------------------------------:|
 |1-0:   |Reveals the respectively ranked tile (with 0 being the tenth)|
 |Left:  |Highlights the left team                                     |
 |Right: |Highlights the right team                                    |
