@@ -137,7 +137,7 @@ class AnswerTile extends StackPane{
                 5,2, 7,3, 3,5               // Bottom Back
         );
         PhongMaterial material = new PhongMaterial();
-        material.setDiffuseMap(new Image("resources\\texture.png"));
+        material.setDiffuseMap(new Image(AnswerTile.class.getResourceAsStream("resources\\texture.png")));
         MeshView tile3D = new MeshView(cuboid);
         tile3D.setMaterial(material);
 
@@ -181,7 +181,7 @@ class AnswerTile extends StackPane{
         isAnAnswer = false;
         this.getChildren().clear();
         rotate(-this.getRotate(), Duration.millis(1));
-        ImageView front = new ImageView("resources\\blank answer tile.png");
+        ImageView front = new ImageView(new Image(AnswerTile.class.getResourceAsStream("resources\\blank answer tile.png")));
         front.setFitHeight(height);
         front.setFitWidth(width);
         this.getChildren().add(front);

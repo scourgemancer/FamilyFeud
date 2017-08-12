@@ -5,6 +5,7 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,7 @@ public class Polls{
 
 	public Polls(String filename){
 		try{
-			File questionFile = new File( "src\\" + filename );
+			File questionFile = new File(Paths.get("src\\" + filename).toUri());
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse( questionFile );
 			doc.getDocumentElement().normalize();
 			NodeList questions = doc.getElementsByTagName("question");
