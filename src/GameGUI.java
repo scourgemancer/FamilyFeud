@@ -60,7 +60,7 @@ public class GameGUI extends Application{
 
     private void setImageAsBackground( Region region, String image, double width, double height ){
         BackgroundImage bi = new BackgroundImage(
-                new Image(GameGUI.class.getResourceAsStream("resources\\" + image), width, height, false, true),
+                new Image(GameGUI.class.getResourceAsStream("/resources/" + image), width, height, false, true),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         region.setBackground( new Background(bi) );
@@ -109,7 +109,7 @@ public class GameGUI extends Application{
 	    //Make the strike images to appear
 	    ArrayList<ImageView> strikemarks = new ArrayList<>();
 	    for(int i=0; i<wrong; i++)
-	        strikemarks.add( new ImageView(new Image(GameGUI.class.getResourceAsStream("resources\\strike.png"))) );
+	        strikemarks.add( new ImageView(new Image(GameGUI.class.getResourceAsStream("resources/strike.png"))) );
 
 
 	    //Make the transitions for the strikes to appear and disappear with
@@ -301,6 +301,16 @@ public class GameGUI extends Application{
 				case "8": answerTiles.get(7).reveal(true); break;
 				case "9": answerTiles.get(8).reveal(true); break;
 				case "0": answerTiles.get(9).reveal(true); break;
+                case "Numpad 1": answerTiles.get(0).reveal(true); break;
+                case "Numpad 2": answerTiles.get(1).reveal(true); break;
+                case "Numpad 3": answerTiles.get(2).reveal(true); break;
+                case "Numpad 4": answerTiles.get(3).reveal(true); break;
+                case "Numpad 5": answerTiles.get(4).reveal(true); break;
+                case "Numpad 6": answerTiles.get(5).reveal(true); break;
+                case "Numpad 7": answerTiles.get(6).reveal(true); break;
+                case "Numpad 8": answerTiles.get(7).reveal(true); break;
+                case "Numpad 9": answerTiles.get(8).reveal(true); break;
+                case "Numpad 0": answerTiles.get(9).reveal(true); break;
 /* restart */   case "R": caretaker.save(); restart(); break;
 /* back */      case "B": caretaker.save(); setupQuestion(--currentQuestion); break;
 /* next */      case "N": caretaker.save(); setupQuestion(++currentQuestion); break;
@@ -324,7 +334,7 @@ public class GameGUI extends Application{
 		stage.setTitle("Family Feud");
 		stage.setFullScreen(true);
 		stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH); //removes the esc hint and keeps it fullscreen
-        stage.getIcons().add(new Image(GameGUI.class.getResourceAsStream("resources\\icon.png")));
+        stage.getIcons().add(new Image(GameGUI.class.getResourceAsStream("resources/icon.png")));
 		stage.show();
 	}
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <questions>
-	<question text=" ">
+	<question text="Sports">
 		<answer text="20% Cooler" points="24"/>
 		<answer text="They're all ... Rocks" points="14"/>
 		<answer text="10 seconds flat" points="12"/>

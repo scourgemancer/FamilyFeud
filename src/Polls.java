@@ -16,7 +16,7 @@ public class Polls{
 
 	public Polls(String filename){
 		try{
-			File questionFile = new File(Paths.get("src\\" + filename).toUri());
+			File questionFile = new File(Paths.get("src/" + filename).toUri());
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse( questionFile );
 			doc.getDocumentElement().normalize();
 			NodeList questions = doc.getElementsByTagName("question");
