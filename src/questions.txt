@@ -1,103 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <questions>
 	<question text="Sports">
-		<answer text="20% Cooler" points="24"/>
-		<answer text="They're all ... Rocks" points="14"/>
-		<answer text="10 seconds flat" points="12"/>
-		<answer text="Eeyup" points="11"/>
-		<answer text="What fun ... sense?" points="11"/>
-		<answer text="Sugarcube" points="8"/>
-		<answer text="Fun! Fun! Fun!" points="6"/>
-		<answer text="What went wrong?" points="6"/>
-		<answer text="THE NIGHT ... FOREVER!" points="5"/>
+		<answer text="Curling" points="30"/>
+		<answer text="Golf" points="17"/>
+		<answer text="Lacrosse" points="13"/>
+		<answer text="Table Tennis" points="8"/>
+		<answer text="Polo" points="7"/>
+		<answer text="Cricket" points="6"/>
+		<answer text="Croquet" points="5"/>
 	</question>
-	<question text=" ">
-		<answer text="His Baby" points="48"/>
-		<answer text="His Wife" points="11"/>
-		<answer text="His Wedding Ring" points="10"/>
-		<answer text="His Armor" points="8"/>
-		<answer text="The Crystal Heart" points="6"/>
-		<answer text="The Army" points="5"/>
-		<answer text="His Sanity" points="5"/>
-		<answer text="The Crystal Empire" points="4"/>
+	<question text="Answering Machine">
+		<answer text="Baking" points="29"/>
+		<answer text="Partying" points="26"/>
+		<answer text="Planning a Party" points="18"/>
+		<answer text="Eating" points="8"/>
+		<answer text="Having Fun" points="7"/>
+		<answer text="Saving Equestria" points="7"/>
 	</question>
-	<question text=" ">
-		<answer text="Alicorn Twilight" points="20"/>
-		<answer text="Library Burns Down" points="17"/>
-		<answer text="Doctor Whooves" points="14"/>
-		<answer text="Derpy Speaks" points="12"/>
-		<answer text="Humans" points="11"/>
-		<answer text="Starlight's Village" points="11"/>
-		<answer text="Reformed Discord" points="9"/>
+	<question text="Fluttershy">
+		<answer text="Concert" points="22"/>
+		<answer text="Convention" points="19"/>
+		<answer text="Anywhere" points="14"/>
+		<answer text="Nightclub" points="8"/>
+		<answer text="A Rave" points="7"/>
+		<answer text="Zoo" points="6"/>
+		<answer text="Haunted House" points="5"/>
+		<answer text="Safari / Hunt" points="5"/>
+		<answer text="Theme Park" points="5"/>
 	</question>
-	<question text=" ">
-		<answer text="Power Puff Girls" points="29"/>
-		<answer text="Teen Titans" points="19"/>
-		<answer text="The Fairly OddParents" points="17"/>
-		<answer text="Star Trek" points="9"/>
-		<answer text="Foster's Home" points="7"/>
-		<answer text="Littlest Pet Shop" points="6"/>
-		<answer text="Ben 10" points="5"/>
-		<answer text="Black Lagoon" points="3"/>
+	<question text="Rarity Magazine">
+	    <answer text="Vogue" points="36"/>
+	    <answer text="Cosmo" points="19"/>
+	    <answer text="Glamour" points="11"/>
+	    <answer text="People" points="9"/>
+	    <answer text="Rolling Stone" points="6"/>
+	    <answer text="Time" points="6"/>
+	    <answer text="Vanity Fair" points="6"/>
 	</question>
-	<question text=" ">
-		<answer text="Weddings" points="20"/>
-		<answer text="Fancy Garden Party" points="18"/>
-		<answer text="Grand Galloping Gala" points="18"/>
-		<answer text="Wonderbolt Academy" points="17"/>
-		<answer text="Fashion Show" points="13"/>
-		<answer text="Carousel Boutique" points="9"/>
-		<answer text="Canterlot High" points="5"/>
+	<question text="Twilight Bigger">
+	    <answer text="Book Collection" points="30"/>
+	    <answer text="Intellect" points="23"/>
+	    <answer text="House" points="16"/>
+	    <answer text="Accomplishment" points="9"/>
+	    <answer text="Ego" points="8"/>
 	</question>
-	<question text=" ">
-		<answer text="Pinkie Pie" points="36"/>
-		<answer text="Twilight Sparkle" points="35"/>
-		<answer text="Rarity" points="11"/>
-		<answer text="Applejack" points="5"/>
-		<answer text="Rainbow Dash" points="4"/>
-		<answer text="Discord" points="3"/>
-		<answer text="Doctor Whooves" points="3"/>
+	<question text="Explosion">
+		<answer text="Pinkie's Party Cannon" points="33"/>
+		<answer text="Twilight" points="19"/>
+		<answer text="Rainboom" points="17"/>
+		<answer text="Random Monster" points="10"/>
+		<answer text="Friendship Lesson" points="7"/>
+		<answer text="Discord" points="6"/>
+		<answer text="CMC" points="4"/>
 	</question>
-	<question text=" ">
-		<answer text="Passed Away" points="60"/>
-		<answer text="Live Somewhere Else" points="13"/>
-		<answer text="Travelling / Vacation" points="9"/>
-		<answer text="Prison" points="6"/>
-		<answer text="Abducted by Aliens" points="4"/>
-		<answer text="On Run From Law" points="4"/>
-		<answer text="Hasbro Said No" points="3"/>
+	<question text="Chrysalis Returns">
+		<answer text="Assemble Team" points="25"/>
+		<answer text="Panic" points="24"/>
+		<answer text="Start Blasting" points="14"/>
+		<answer text="Make Everything Worse" points="13"/>
+		<answer text="Negotiate" points="7"/>
+		<answer text="Research Weakness" points="6"/>
 	</question>
-	<question text=" ">
-		<answer text="THE MUFFIN MARE" points="32"/>
-		<answer text="Pinkie Pie" points="20"/>
-		<answer text="Trixie" points="15"/>
-		<answer text="Rainbow Dash" points="8"/>
-		<answer text="Twilight Sparkle" points="8"/>
-		<answer text="Rarity" points="7"/>
-		<answer text="Princess Luna" points="4"/>
-		<answer text="Starlight Glimmer" points="4"/>
+	<question text="Scootaloo's Photography">
+		<answer text="Nothing" points="28"/>
+		<answer text="Even More Dash" points="20"/>
+		<answer text="Dash's Trophies" points="15"/>
+		<answer text="CMC" points="14"/>
+		<answer text="Dash's Parents" points="14"/>
+		<answer text="Dash's House" points="4"/>
 	</question>
-	<question text=" ">
-		<answer text="Friends/Social Skills" points="24"/>
-		<answer text="Her Color" points="20"/>
-		<answer text="Her Glasses" points="14"/>
-		<answer text="Her Mane Style" points="10"/>
-		<answer text="Not an Alicorn" points="9"/>
-		<answer text="Thick Eyebrows" points="6"/>
-		<answer text="Her Name" points="5"/>
-		<answer text="Wears a Sweater" points="4"/>
-		<answer text="Where She Lives" points="4"/>
+	<question text="Rainbow Rhyme">
+	    <answer text="Crash" points="42"/>
+	    <answer text="Trash" points="16"/>
+	    <answer text="Cash" points="11"/>
+	    <answer text="Smash" points="8"/>
+	    <answer text="Slash" points="7"/>
+	    <answer text="Flash" points="5"/>
+	    <answer text="Ash" points="3"/>
+	    <answer text="Moustache" points="3"/>
 	</question>
-	<question text=" ">
-		<answer text="Lyra X BonBon" points="18"/>
-		<answer text="Applejack X Rainbow" points="10"/>
-		<answer text="Fluttershy X Discord" points="10"/>
-		<answer text="Rarity X Applejack" points="10"/>
-		<answer text="Fluttershy X Rainbow" points="8"/>
-		<answer text="Sunset X Twilight" points="8"/>
-		<answer text="Luna X Big Mac" points="6"/>
-		<answer text="Twilight X Rainbow" points="6"/>
-		<answer text="Vinyl X Octavia" points="6"/>
-		<answer text="Spike X Rarity" points="5"/>
+	<question text="Best Princess">
+	    <answer text="Luna" points="34"/>
+	    <answer text="Big Mac" points="19"/>
+	    <answer text="Celestia" points="11"/>
+	    <answer text="Cadance" points="9"/>
+	    <answer text="Twilight" points="8"/>
+	    <answer text="Ember" points="5"/>
+	    <answer text="Discord" points="4"/>
+	    <answer text="Spike" points="3"/>
+	    <answer text="Little Strongheart" points="2"/>
+	    <answer text="Flurry Heart" points="1"/>
 	</question>
 </questions>
