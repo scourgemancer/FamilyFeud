@@ -81,19 +81,21 @@ public class GameGUI extends Application{
     }
 
 	void setupQuestion(int i){
-        numWrong = 0;
-        currentPoints = 0;
-        currentPointsText.setText("0");
-        selectTeam(0);
-        for(AnswerTile tile: answerTiles)
-            tile.clear();
+        if(-1 < i && i < polls.questions.size()){
+            numWrong = 0;
+            currentPoints = 0;
+            currentPointsText.setText("0");
+            selectTeam(0);
+            for(AnswerTile tile : answerTiles)
+                tile.clear();
 
-        if(currentQuestion < 0) currentQuestion = 0;
-        if(currentQuestion > polls.questions.size()-1) currentQuestion = polls.questions.size()-1;
-        Question q = polls.questions.get(i);
+            if(currentQuestion<0) currentQuestion = 0;
+            if(currentQuestion>polls.questions.size() - 1) currentQuestion = polls.questions.size() - 1;
+            Question q = polls.questions.get(i);
 
-        for(int j=0; j<q.answers.size(); j++)
-	        answerTiles.get(j).setAnswer(q.answers.get(j));
+            for(int j = 0; j<q.answers.size(); j++)
+                answerTiles.get(j).setAnswer(q.answers.get(j));
+        }
     }
 
     private void restart(){
